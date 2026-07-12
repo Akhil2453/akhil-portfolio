@@ -1,11 +1,30 @@
 ---
-const { eyebrow, title, description } = Astro.props;
+const {
+  eyebrow,
+  title,
+  description,
+  compact = false
+} = Astro.props;
 ---
-<section class="page-hero">
+
+<section
+  class:list={[
+    'page-hero',
+    {
+      'page-hero--compact': compact
+    }
+  ]}
+>
   <div class="container">
     <p class="eyebrow">{eyebrow}</p>
     <h1>{title}</h1>
-    {description && <p class="lead">{description}</p>}
+
+    {
+      description && (
+        <p class="lead">{description}</p>
+      )
+    }
+
     <slot />
   </div>
 </section>

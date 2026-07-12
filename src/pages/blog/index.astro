@@ -7,8 +7,13 @@ const showDrafts = process.env.NODE_ENV !== 'production' || process.env.SHOW_DRA
 const posts = (await getCollection('blog')).filter((p) => showDrafts || !p.data.draft).sort((a,b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 <BaseLayout title="Blog and Insights | Akhil Arun Menon" description="Articles on Design Engineering education, activity-based learning, EdTech, data visualisation, robotics, AI in education and academic programme development.">
-  <PageHero eyebrow="Blog and insights" title="Notes from the intersection of education, technology, design and data" description="Practical reflections, frameworks, case studies and professional learning from academic programmes and technical projects." />
-  <section class="section">
+  <PageHero
+  compact
+  eyebrow="Blog and insights"
+  title="Notes from the intersection of education, technology, design and data"
+  description="Practical reflections, frameworks, case studies and professional learning from academic programmes and technical projects."
+/>
+  <section class="section blog-list-section">
     <div class="container">
       <div class="filter-bar"><input class="search-input" type="search" placeholder="Search articles by topic or keyword" aria-label="Search articles" data-blog-search /></div>
       <p class="text-muted" data-blog-count>{posts.length} article{posts.length === 1 ? '' : 's'}</p>

@@ -26,17 +26,49 @@ const articleSchema = {
 ---
 <BaseLayout title={`${post.data.title} | Akhil Arun Menon`} description={post.data.description} image={post.data.image} article jsonLd={articleSchema} noindex={post.data.draft}>
   <article>
-    <header class="page-hero">
-      <div class="narrow">
-        {post.data.draft && <div class="notice" style="margin-bottom:1.5rem"><strong>Draft preview:</strong> this article is hidden from production builds unless SHOW_DRAFTS is enabled.</div>}
+  <header class="page-hero article-hero">
+    <div class="container article-hero-grid">
+      <div class="article-hero-copy">
+        {
+          post.data.draft && (
+            <div class="notice" style="margin-bottom:1.5rem">
+              <strong>Draft preview:</strong> this article is hidden from
+              production builds unless SHOW_DRAFTS is enabled.
+            </div>
+          )
+        }
+
         <p class="eyebrow">{post.data.category}</p>
+
         <h1>{post.data.title}</h1>
+
         <p class="lead">{post.data.description}</p>
-        <div class="card-meta"><time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time><span>{readingTime(post.body ?? '')} min read</span></div>
-        <div class="tag-list">{post.data.tags.map((tag: string) => <span class="tag">{tag}</span>)}</div>
+
+        <div class="card-meta">
+          <time datetime={post.data.pubDate.toISOString()}>
+            {formatDate(post.data.pubDate)}
+          </time>
+
+          <span>{readingTime(post.body ?? '')} min read</span>
+        </div>
+
+        <div class="tag-list">
+          {
+            post.data.tags.map((tag: string) => (
+              <span class="tag">{tag}</span>
+            ))
+          }
+        </div>
       </div>
-    </header>
-    <div class="narrow" style="margin-top:-2rem;position:relative;z-index:2"><div class="project-cover"><img src={withBase(post.data.image)} alt={post.data.imageAlt} /></div></div>
+
+      <div class="article-hero-media">
+        <img
+          src={withBase(post.data.image)}
+          alt={post.data.imageAlt}
+        />
+      </div>
+    </div>
+  </header>
     <section class="section"><div class="narrow prose"><Content /></div></section>
   </article>
 
