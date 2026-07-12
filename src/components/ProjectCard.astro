@@ -1,0 +1,16 @@
+---
+import { withBase } from '../utils/url';
+const { project } = Astro.props;
+const href = withBase(`/projects/${project.id}`);
+---
+<article class="card project-card" data-project-card data-category={project.data.category.toLowerCase()} data-search={`${project.data.title} ${project.data.summary} ${project.data.tools.join(' ')}`.toLowerCase()}>
+  <a class="card-link" href={href}>
+    <div class="card-media"><img src={withBase(project.data.image)} alt={project.data.imageAlt} loading="lazy" /></div>
+    <div class="card-body">
+      <div class="card-meta"><span>{project.data.category}</span><span>{project.data.period}</span></div>
+      <h3>{project.data.title}</h3>
+      <p class="text-muted">{project.data.summary}</p>
+      <div class="tag-list">{project.data.tools.slice(0,4).map((tool: string) => <span class="tag">{tool}</span>)}</div>
+    </div>
+  </a>
+</article>

@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { withBase } from '../utils/url';
+---
+<BaseLayout title="Work at REVA University | Akhil Arun Menon" description="Akhil Arun Menon's current work at REVA University's School of Design Engineering across curriculum, teacher preparation and hands-on assessment.">
+  <div class="reva-page">
+    <PageHero eyebrow="Current appointment" title="Building the academic systems behind Design Engineering" description="Assistant Professor, School of Design Engineering, REVA University — June 2026 to present." />
+
+    <section class="section">
+      <div class="container split">
+        <div>
+          <p class="eyebrow">Role in practice</p>
+          <h2>From programme intent to classroom execution</h2>
+          <p class="lead">The work focuses on how a new Design Engineering programme is translated into coherent courses, prepared faculty, meaningful activities and defensible assessment.</p>
+          <p>This requires engagement across the full academic delivery chain: reviewing syllabus and lesson-plan alignment, shaping activity-based classroom strategies, supporting course owners, identifying resources, and ensuring that assessment captures design process as well as final output.</p>
+          <p>The role also contributes to student engagement and the development of spaces where ideas, prototypes and project evidence can be created and displayed.</p>
+        </div>
+        <div class="split-media"><img src={withBase('/images/teaching/educator-workshop-wide.webp')} alt="Akhil Arun Menon facilitating a faculty-development workshop" /></div>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container">
+        <p class="eyebrow">Primary responsibilities</p>
+        <h2>Three operating priorities</h2>
+        <div class="grid grid-3" style="margin-top:2rem">
+          <article class="feature-card reva-accent"><div class="icon">01</div><h3>Curriculum Development</h3><p>Structuring course content, reviewing alignment between syllabi and lesson plans, refining outcomes and converting programme intent into teachable sequences.</p></article>
+          <article class="feature-card reva-accent"><div class="icon">02</div><h3>Teacher Training</h3><p>Preparing faculty to facilitate activity-based sessions, use design-oriented methods, guide learner projects and evaluate process evidence.</p></article>
+          <article class="feature-card reva-accent"><div class="icon">03</div><h3>Hands-on Assessment</h3><p>Developing assessment strategies that examine problem framing, application, iteration, prototyping, reflection and communication.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark">
+      <div class="container">
+        <p class="eyebrow">Current initiatives</p>
+        <h2>Programme elements under development</h2>
+        <div class="grid grid-3" style="margin-top:2rem">
+          <article class="feature-card"><span class="tag">Student engagement</span><h3 style="margin-top:1rem">Design Spark</h3><p>A pre-academic journey focused on observation, sketching, design failures, product thinking, technology awareness and reflective process documentation.</p></article>
+          <article class="feature-card"><span class="tag">Ideation</span><h3 style="margin-top:1rem">Idea Lab</h3><p>A structured environment for developing concepts, challenging assumptions, documenting iterations and moving towards testable solutions.</p></article>
+          <article class="feature-card"><span class="tag">Portfolio culture</span><h3 style="margin-top:1rem">Project Display Room</h3><p>A proposed space for presenting the complete design story: problem, evidence, alternatives, prototype, testing and learning.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container grid grid-2">
+        <div>
+          <p class="eyebrow">Academic implementation</p>
+          <h2>Activity-based lesson planning</h2>
+          <p>A lesson plan should show more than the content to be covered. It should identify what learners will do, what evidence they will produce, what resources are required, where feedback occurs and how the activity supports the course outcome.</p>
+          <div class="tag-list"><span class="tag">Learning outcomes</span><span class="tag">Learner action</span><span class="tag">Resources</span><span class="tag">Evidence</span><span class="tag">Reflection</span></div>
+        </div>
+        <div>
+          <p class="eyebrow">Assessment strategy</p>
+          <h2>Evaluating design process</h2>
+          <p>Hands-on assessment needs to recognise that a meaningful failure can demonstrate stronger learning than an unexamined success. Rubrics therefore consider understanding, application, iteration, technical quality and communication.</p>
+          <div class="tag-list"><span class="tag">Problem framing</span><span class="tag">Application</span><span class="tag">Testing</span><span class="tag">Iteration</span><span class="tag">Communication</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container split">
+        <div class="split-media"><img src={withBase('/images/teaching/educator-workshop-interactive.webp')} alt="Akhil Arun Menon discussing a reflective activity with educators" /></div>
+        <div>
+          <p class="eyebrow">Working method</p>
+          <h2>Coordination without losing academic detail</h2>
+          <p class="lead">The role involves connecting course-level decisions with programme-level consistency.</p>
+          <p>Faculty inputs, course structures, resource needs, laboratory planning, assessment patterns and student engagement initiatives are treated as connected elements. The objective is not merely to complete documents, but to establish a repeatable delivery system for the programme.</p>
+          <p class="notice"><strong>Public-content boundary:</strong> University logos, internal documents and screenshots are not displayed. Programme descriptions on this page are limited to information approved for public sharing.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+<style>
+  .reva-page { --reva-accent: var(--reva-red); }
+  .reva-page :global(.page-hero) { background: linear-gradient(120deg, rgba(179,32,37,.22), transparent 48%), var(--navy-900); }
+  .reva-accent { border-top:4px solid var(--reva-accent); }
+  .reva-accent .icon { background:var(--reva-accent); color:#fff; }
+</style>

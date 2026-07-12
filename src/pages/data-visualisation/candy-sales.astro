@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import DashboardMock from '../../components/DashboardMock.astro';
+import { withBase } from '../../utils/url';
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Dataset',
+  name: 'Candy Sales Power BI Portfolio Case Study',
+  description: 'A portfolio case study using sales, products, factories, targets and US ZIP data to demonstrate Power BI modelling and dashboard design.',
+  creator: { '@type': 'Person', name: 'Akhil Arun Menon' }
+};
+---
+<BaseLayout title="Candy Sales Power BI Case Study | Akhil Arun Menon" description="End-to-end Power BI case study covering data preparation, modelling, DAX, product profitability, sales targets and geography." jsonLd={schema}>
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Power BI case study</p>
+      <h1>Candy Sales Performance, Margin and Target Analysis</h1>
+      <p class="lead">A portfolio build documenting the complete analytical journey from six source files to a three-page decision-oriented report.</p>
+      <div class="tag-list"><span class="tag">In development</span><span class="tag">Simulated / portfolio data</span><span class="tag">No source download</span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">Business question</p>
+        <h2>Where is growth creating value—and where is it missing the target?</h2>
+        <p>The case study is designed to answer five connected questions:</p>
+        <ol class="prose">
+          <li>How are sales and gross profit changing over time?</li>
+          <li>Which products and factories contribute the strongest margins?</li>
+          <li>How does 2024 performance compare with the assigned sales targets?</li>
+          <li>Which locations and regions explain performance differences?</li>
+          <li>Are shipping patterns creating operational concerns?</li>
+        </ol>
+      </div>
+      <DashboardMock />
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container">
+      <p class="eyebrow">Source inventory</p>
+      <h2>Six files, one analytical model</h2>
+      <div class="grid grid-3" style="margin-top:2rem">
+        <article class="feature-card"><h3>Candy_Sales.csv</h3><p>Transaction-level fact data with order, product, location, units, sales and shipping information.</p></article>
+        <article class="feature-card"><h3>Candy_Products.csv</h3><p>Product attributes, divisions, categories, factory references, unit price and unit cost.</p></article>
+        <article class="feature-card"><h3>Candy_Factories.csv</h3><p>Factory names and location attributes used for manufacturing analysis.</p></article>
+        <article class="feature-card"><h3>Candy_Targets.csv</h3><p>2024 sales-target values used for plan-versus-actual measures.</p></article>
+        <article class="feature-card"><h3>uszips.csv</h3><p>ZIP-code geography used to enrich location analysis.</p></article>
+        <article class="feature-card"><h3>Data dictionary</h3><p>Field definitions and metadata used to validate interpretation.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container grid grid-2">
+      <div>
+        <p class="eyebrow">Power Query</p>
+        <h2>Data preparation decisions</h2>
+        <ul class="prose">
+          <li>Standardise data types for dates, quantities, currency and keys.</li>
+          <li>Check uniqueness and nulls in product, factory, target and ZIP lookup tables.</li>
+          <li>Normalise text fields used in relationships and filters.</li>
+          <li>Validate price, cost and quantity ranges before measure development.</li>
+          <li>Document the shipping-date anomaly before calculating delivery duration.</li>
+        </ul>
+      </div>
+      <div>
+        <p class="eyebrow">Data quality note</p>
+        <h2>Shipping-date correction</h2>
+        <p>The raw Ship Date field contains a large offset and should not be interpreted directly as delivery duration. The portfolio transformation records the issue and calculates an adjusted measure:</p>
+        <pre><code>Estimated Delivery Days =
+Duration.Days([Ship Date] - [Order Date]) - 2000</code></pre>
+        <p class="text-small">This is treated as a dataset-specific correction and is clearly disclosed rather than hidden inside the model.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Model design</p>
+      <h2>Relationship structure</h2>
+      <div class="grid grid-3" style="margin-top:2rem">
+        <article class="feature-card"><h3>Sales fact</h3><p>The central transaction table supports sales, profit, quantity, time, product and geography analysis.</p></article>
+        <article class="feature-card"><h3>Product and factory</h3><p>Products filter Sales; Factories filter Products, enabling manufacturing-level analysis without duplicating attributes.</p></article>
+        <article class="feature-card"><h3>Targets and geography</h3><p>Targets connect to the required reporting grain, ZIP data enriches location, and a dedicated Date table controls time intelligence.</p></article>
+      </div>
+      <div class="notice" style="margin-top:1.5rem"><strong>Planned relationships:</strong> Products → Sales, Factories → Products, Targets → Sales, US_Zips → Sales and Date Table → Sales.</div>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container grid grid-2">
+      <div>
+        <p class="eyebrow">Core DAX</p>
+        <h2>Performance measures</h2>
+        <pre><code>Total Sales = SUM(Sales[Sales])
+
+Total Cost =
+SUMX(Sales, Sales[Units] * RELATED(Products[Unit Cost]))
+
+Total Gross Profit = [Total Sales] - [Total Cost]
+
+Gross Profit % = DIVIDE([Total Gross Profit], [Total Sales])
+
+2024 Sales =
+CALCULATE([Total Sales], 'Date'[Year] = 2024)
+
+2024 Target = SUM(Targets[Target])
+
+Target Variance = [2024 Sales] - [2024 Target]
+
+Target Variance % = DIVIDE([Target Variance], [2024 Target])</code></pre>
+      </div>
+      <div>
+        <p class="eyebrow">Additional measures</p>
+        <h2>Trend and operations</h2>
+        <pre><code>Previous Year Sales =
+CALCULATE([Total Sales], DATEADD('Date'[Date], -1, YEAR))
+
+YoY Growth % =
+DIVIDE([Total Sales] - [Previous Year Sales], [Previous Year Sales])
+
+Average Delivery Days =
+AVERAGE(Sales[Estimated Delivery Days])
+
+Orders = DISTINCTCOUNT(Sales[Order ID])
+
+Average Order Value = DIVIDE([Total Sales], [Orders])</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Report architecture</p>
+      <h2>Three pages, three decision levels</h2>
+      <div class="grid grid-3" style="margin-top:2rem">
+        <article class="feature-card"><span class="tag">Page 01</span><h3 style="margin-top:1rem">Executive Sales Overview</h3><p>KPI cards, monthly trend, sales by division, regional contribution, margin and high-level filters.</p></article>
+        <article class="feature-card"><span class="tag">Page 02</span><h3 style="margin-top:1rem">Product Margin and Profitability</h3><p>Product and factory comparison, revenue-versus-margin view, contribution analysis and low-margin exceptions.</p></article>
+        <article class="feature-card"><span class="tag">Page 03</span><h3 style="margin-top:1rem">2024 Target and Geography</h3><p>Actual versus target, variance, map analysis, state or ZIP drill-down and delivery-performance context.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container">
+      <p class="eyebrow">Interactive report</p>
+      <h2>Power BI embed placeholder</h2>
+      <div class="dashboard-shell" style="margin-top:2rem">
+        <div class="dashboard-topbar"><strong>Candy Sales Portfolio Report</strong><span>Responsive embed container</span></div>
+        <div class="dashboard-body"><div class="notice"><strong>Next build step:</strong> complete the PBIX report, publish it through an approved public or secure embed method, and replace this panel with the report URL.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container cta-band">
+      <p class="eyebrow">Portfolio roadmap</p>
+      <h2>Continue with HR, marketing and academic analytics case studies.</h2>
+      <div class="btn-row"><a class="btn btn-gold" href={withBase('/data-visualisation/dashboard-roadmap')}>View 10 dashboard ideas</a><a class="btn btn-outline" href={withBase('/contact')}>Discuss Power BI training</a></div>
+    </div>
+  </section>
+</BaseLayout>

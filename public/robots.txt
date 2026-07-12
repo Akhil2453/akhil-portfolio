@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://akhil2453.github.io/akhil-portfolio/sitemap-index.xml

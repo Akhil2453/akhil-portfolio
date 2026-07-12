@@ -1,0 +1,7 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../utils/url';
+---
+<BaseLayout title="Page Not Found | Akhil Arun Menon" description="The requested page could not be found." noindex>
+  <section class="section"><div class="narrow" style="text-align:center;padding-block:5rem"><p class="eyebrow">404</p><h1>Page not found</h1><p class="lead" style="margin-inline:auto">The page may have moved, or the link may be incomplete.</p><a class="btn" href={withBase('/')}>Return to the homepage</a></div></section>
+</BaseLayout>

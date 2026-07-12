@@ -1,0 +1,5 @@
+---
+import { withBase } from '../utils/url';
+const { size = 44 } = Astro.props;
+---
+<img src={withBase('/images/brand/monogram.svg')} width={size} height={size} alt="AAM monogram" loading="eager" />

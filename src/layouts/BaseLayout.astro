@@ -1,0 +1,96 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+import { absoluteUrl, withBase } from '../utils/url';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  article?: boolean;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  title = 'Akhil Arun Menon — Design Engineering, EdTech, Robotics and Data Visualisation',
+  description = 'Academic programme strategist, design engineering educator, robotics mentor and data visualisation practitioner based in Bengaluru, India.',
+  image = '/images/brand/og-default.jpg',
+  article = false,
+  noindex = false,
+  jsonLd
+} = Astro.props;
+const canonical = absoluteUrl(Astro.url.pathname);
+const imageUrl = absoluteUrl(image);
+const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Akhil Arun Menon',
+  url: absoluteUrl('/'),
+  image: absoluteUrl('/images/profile/akhil-headshot.webp'),
+  jobTitle: 'Assistant Professor, School of Design Engineering',
+  worksFor: { '@type': 'CollegeOrUniversity', name: 'REVA University' },
+  address: { '@type': 'PostalAddress', addressLocality: 'Bengaluru', addressCountry: 'IN' },
+  email: 'mailto:akhil.menon94@gmail.com',
+  telephone: '+91-8655752503',
+  sameAs: [
+    'https://www.linkedin.com/in/akhilmenon24/',
+    'https://github.com/Akhil2453'
+  ],
+  knowsAbout: ['Design Engineering Education','Academic Programme Development','Robotics','Data Visualisation','EdTech','Curriculum Design','IoT','Embedded Systems']
+};
+const schemas = jsonLd ? (Array.isArray(jsonLd) ? [personSchema, ...jsonLd] : [personSchema, jsonLd]) : [personSchema];
+---
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Akhil Arun Menon" />
+    <meta name="theme-color" content="#071827" />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href={withBase('/images/brand/favicon.svg')} type="image/svg+xml" />
+    <link rel="manifest" href={withBase('/site.webmanifest')} />
+    <meta property="og:type" content={article ? 'article' : 'website'} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:site_name" content="Akhil Arun Menon" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <script is:inline>
+      (() => {
+        const saved = localStorage.getItem('theme');
+        const preferredDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.dataset.theme = saved ?? (preferredDark ? 'dark' : 'light');
+      })();
+    </script>
+    {schemas.map((schema) => <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />)}
+    {gaId && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+        <script is:inline define:vars={{ gaId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', gaId, { anonymize_ip: true });
+        </script>
+      </>
+    )}
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <Header />
+    <main id="main-content"><slot /></main>
+    <Footer />
+  </body>
+</html>

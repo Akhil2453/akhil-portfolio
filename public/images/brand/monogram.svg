@@ -1,0 +1,10 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">AAM monogram</title>
+  <desc id="desc">Geometric monogram for Akhil Arun Menon using navy and gold.</desc>
+  <rect width="256" height="256" rx="48" fill="#071827"/>
+  <path d="M40 184L83 64h27l43 120h-27l-9-28H76l-9 28H40zm44-53h25l-12-39-13 39z" fill="#D3AF37"/>
+  <path d="M112 184l32-120h24l24 73 24-73h24l32 120h-27l-19-76-25 76h-18l-25-76-19 76h-27z" fill="#F5F1E7" transform="translate(-18 0) scale(.78 1)"/>
+  <circle cx="48" cy="48" r="7" fill="#D3AF37"/>
+  <circle cx="208" cy="48" r="7" fill="#D3AF37"/>
+  <path d="M55 48h36M165 48h36" stroke="#D3AF37" stroke-width="4" stroke-linecap="round"/>
+</svg>

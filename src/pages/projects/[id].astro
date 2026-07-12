@@ -1,0 +1,79 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { withBase, absoluteUrl } from '../../utils/url';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('project');
+  return projects.map((project) => ({ params: { id: project.id }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const projectSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: project.data.title,
+  description: project.data.summary,
+  creator: { '@type': 'Person', name: 'Akhil Arun Menon' },
+  image: absoluteUrl(project.data.image),
+  dateCreated: project.data.period,
+  keywords: project.data.tools.join(', ')
+};
+const isFgc = project.id === 'first-global-challenge-2025';
+---
+<BaseLayout title={`${project.data.title} | Akhil Arun Menon`} description={project.data.summary} image={project.data.image} jsonLd={projectSchema}>
+  <section class="section">
+    <div class="container project-header">
+      <div>
+        <p class="eyebrow">{project.data.category}</p>
+        <h1>{project.data.title}</h1>
+        <p class="lead">{project.data.summary}</p>
+        <div class="project-facts">
+          <div class="project-fact"><span>Period</span><strong>{project.data.period}</strong></div>
+          <div class="project-fact"><span>Status</span><strong>{project.data.status.replace('-', ' ')}</strong></div>
+          {project.data.organisation && <div class="project-fact"><span>Organisation</span><strong>{project.data.organisation}</strong></div>}
+          {project.data.role && <div class="project-fact"><span>Role</span><strong>{project.data.role}</strong></div>}
+        </div>
+        <div class="tag-list">{project.data.tools.map((tool: string) => <span class="tag">{tool}</span>)}</div>
+      </div>
+      <div class="project-cover"><img src={withBase(project.data.image)} alt={project.data.imageAlt} /></div>
+    </div>
+  </section>
+
+  <section class="section-sm section-soft">
+    <div class="container grid grid-2">
+      <div>
+        <p class="eyebrow">Outcomes</p>
+        <h2>What the work produced</h2>
+      </div>
+      <ul class="prose">{project.data.outcomes.map((outcome: string) => <li>{outcome}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <article class="narrow prose"><Content /></article>
+  </section>
+
+  {isFgc && (
+    <section class="section section-dark">
+      <div class="container">
+        <p class="eyebrow">Engineering gallery</p>
+        <h2>Subsystems and final integration</h2>
+        <div class="gallery" style="margin-top:2rem">
+          <img src={withBase('/images/robotics/fgc-robot-labelled.webp')} alt="Labelled CAD rendering showing the drivetrain, feeder, shooter, intake, climber and guides" loading="lazy" />
+          <img src={withBase('/images/robotics/fgc-climber-detail.webp')} alt="CAD detail of the climbing mechanism" loading="lazy" />
+          <img src={withBase('/images/robotics/fgc-intake-detail.webp')} alt="CAD detail of the intake mechanism" loading="lazy" />
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section">
+    <div class="container cta-band">
+      <p class="eyebrow">Next</p>
+      <h2>Explore related work or discuss a programme, curriculum, robotics or data assignment.</h2>
+      <div class="btn-row"><a class="btn btn-gold" href={withBase('/projects')}>Back to projects</a><a class="btn btn-outline" href={withBase('/contact')}>Contact Akhil</a></div>
+    </div>
+  </section>
+</BaseLayout>

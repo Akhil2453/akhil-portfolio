@@ -1,0 +1,138 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Content Studio | Akhil Arun Menon" description="Local content-entry generator for projects, articles and professional updates." noindex>
+  <section class="page-hero"><div class="container"><p class="eyebrow">Private maintenance utility</p><h1>Content Studio</h1><p class="lead">Generate correctly formatted Markdown entries for projects, blog articles and LinkedIn or professional updates without manually writing frontmatter.</p></div></section>
+  <section class="section">
+    <div class="container contact-layout">
+      <aside>
+        <p class="eyebrow">Workflow</p>
+        <h2>Generate, review, upload</h2>
+        <ol class="prose"><li>Select the content type.</li><li>Complete the visible fields.</li><li>Generate and review the Markdown.</li><li>Download the file.</li><li>Place it in the matching <code>src/content</code> folder and push to GitHub.</li></ol>
+        <div class="notice"><strong>Security:</strong> this utility runs entirely in the browser. It does not store content or connect to GitHub.</div>
+        <p style="margin-top:1rem"><a class="btn btn-outline" href="https://github.com/Akhil2453/akhil-portfolio/tree/main/src/content" target="_blank" rel="noopener">Open GitHub content folders</a></p>
+      </aside>
+
+      <div>
+        <form class="card card-body" data-studio-form>
+          <div class="form-grid">
+            <div class="form-group full"><label for="content-type">Content type</label><select class="form-control" id="content-type" data-field="type"><option value="project">Project</option><option value="blog">Blog article</option><option value="update">Professional / LinkedIn update</option></select></div>
+            <div class="form-group"><label for="studio-title">Title</label><input class="form-control" id="studio-title" data-field="title" required /></div>
+            <div class="form-group"><label for="studio-slug">Slug / filename</label><input class="form-control" id="studio-slug" data-field="slug" placeholder="generated-from-title" /></div>
+            <div class="form-group full"><label for="studio-summary">Summary / description</label><textarea class="form-control" id="studio-summary" data-field="summary" required></textarea></div>
+
+            <div class="form-group" data-for="project"><label>Category</label><input class="form-control" data-field="project-category" placeholder="Robotics & Innovation" /></div>
+            <div class="form-group" data-for="project"><label>Period</label><input class="form-control" data-field="period" placeholder="2026 – Present" /></div>
+            <div class="form-group" data-for="project"><label>Organisation</label><input class="form-control" data-field="organisation" /></div>
+            <div class="form-group" data-for="project"><label>Role</label><input class="form-control" data-field="role" /></div>
+            <div class="form-group" data-for="project"><label>Status</label><select class="form-control" data-field="status"><option>active</option><option>completed</option><option>in-development</option><option>archived</option></select></div>
+            <div class="form-group" data-for="project"><label>Tools, comma-separated</label><input class="form-control" data-field="tools" /></div>
+            <div class="form-group full" data-for="project"><label>Outcomes, one per line</label><textarea class="form-control" data-field="outcomes"></textarea></div>
+
+            <div class="form-group" data-for="blog" hidden><label>Publication date</label><input class="form-control" type="date" data-field="pub-date" /></div>
+            <div class="form-group" data-for="blog" hidden><label>Blog category</label><input class="form-control" data-field="blog-category" /></div>
+            <div class="form-group full" data-for="blog" hidden><label>Tags, comma-separated</label><input class="form-control" data-field="tags" /></div>
+            <div class="form-group" data-for="blog" hidden><label><input type="checkbox" data-field="draft" /> Draft</label></div>
+
+            <div class="form-group" data-for="update" hidden><label>Update date</label><input class="form-control" type="date" data-field="update-date" /></div>
+            <div class="form-group" data-for="update" hidden><label>Platform</label><select class="form-control" data-field="platform"><option>LinkedIn</option><option>Website</option><option>Event</option><option>Milestone</option></select></div>
+            <div class="form-group full" data-for="update" hidden><label>Original post URL</label><input class="form-control" type="url" data-field="url" placeholder="https://www.linkedin.com/posts/..." /></div>
+
+            <div class="form-group"><label>Image path</label><input class="form-control" data-field="image" placeholder="/images/uploads/example.webp" /></div>
+            <div class="form-group"><label>Image alt text</label><input class="form-control" data-field="image-alt" /></div>
+            <div class="form-group"><label><input type="checkbox" data-field="featured" /> Featured</label></div>
+            <div class="form-group full" data-for="project blog"><label>Body content in Markdown</label><textarea class="form-control" data-field="body" style="min-height:260px" placeholder="## Context&#10;&#10;Write the case study or article here."></textarea></div>
+            <div class="form-group full"><button class="btn btn-gold" type="submit">Generate Markdown</button></div>
+          </div>
+        </form>
+
+        <div class="card card-body" style="margin-top:1.5rem" data-output-card hidden>
+          <p class="eyebrow">Generated file</p>
+          <label for="markdown-output">Review before publishing</label>
+          <textarea class="form-control" id="markdown-output" data-output style="min-height:400px;font-family:ui-monospace,monospace"></textarea>
+          <div class="btn-row" style="margin-top:1rem"><button class="btn" type="button" data-copy>Copy</button><button class="btn btn-outline" type="button" data-download>Download .md</button></div>
+          <p class="form-note" data-filename></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+<script is:inline>
+  const form = document.querySelector('[data-studio-form]');
+  const typeSelect = document.querySelector('[data-field="type"]');
+  const titleInput = document.querySelector('[data-field="title"]');
+  const slugInput = document.querySelector('[data-field="slug"]');
+  const outputCard = document.querySelector('[data-output-card]');
+  const output = document.querySelector('[data-output]');
+  const filenameText = document.querySelector('[data-filename]');
+  let filename = 'content.md';
+
+  const field = (name) => document.querySelector(`[data-field="${name}"]`);
+  const value = (name) => field(name)?.value?.trim() ?? '';
+  const checked = (name) => Boolean(field(name)?.checked);
+  const yaml = (text) => JSON.stringify(text ?? '');
+  const array = (text) => text.split(',').map((item) => item.trim()).filter(Boolean);
+  const lines = (text) => text.split('\n').map((item) => item.trim()).filter(Boolean);
+  const slugify = (text) => text.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+  titleInput?.addEventListener('input', () => {
+    if (!slugInput.dataset.edited) slugInput.value = slugify(titleInput.value);
+  });
+  slugInput?.addEventListener('input', () => slugInput.dataset.edited = 'true');
+
+  const showFields = () => {
+    const type = typeSelect.value;
+    document.querySelectorAll('[data-for]').forEach((element) => {
+      const types = element.dataset.for.split(' ');
+      element.hidden = !types.includes(type);
+    });
+  };
+  typeSelect?.addEventListener('change', showFields);
+  showFields();
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const type = value('type');
+    const title = value('title');
+    const slug = value('slug') || slugify(title);
+    const summary = value('summary');
+    const image = value('image') || '/images/brand/og-default.jpg';
+    const alt = value('image-alt') || title;
+    let text = '---\n';
+    if (type === 'project') {
+      text += `title: ${yaml(title)}\nsummary: ${yaml(summary)}\ncategory: ${yaml(value('project-category') || 'Portfolio')}\nperiod: ${yaml(value('period') || String(new Date().getFullYear()))}\n`;
+      if (value('organisation')) text += `organisation: ${yaml(value('organisation'))}\n`;
+      if (value('role')) text += `role: ${yaml(value('role'))}\n`;
+      text += `status: ${yaml(value('status') || 'completed')}\nfeatured: ${checked('featured')}\nimage: ${yaml(image)}\nimageAlt: ${yaml(alt)}\ntools: ${JSON.stringify(array(value('tools')))}\noutcomes: ${JSON.stringify(lines(value('outcomes')))}\nlinks: []\norder: 99\n---\n\n${value('body')}\n`;
+      filename = `${slug}.md`;
+    } else if (type === 'blog') {
+      const date = value('pub-date') || new Date().toISOString().slice(0,10);
+      text += `title: ${yaml(title)}\ndescription: ${yaml(summary)}\npubDate: ${date}\ncategory: ${yaml(value('blog-category') || 'Insights')}\ntags: ${JSON.stringify(array(value('tags')))}\nimage: ${yaml(image)}\nimageAlt: ${yaml(alt)}\ndraft: ${checked('draft')}\nfeatured: ${checked('featured')}\n---\n\n${value('body')}\n`;
+      filename = `${slug}.md`;
+    } else {
+      const date = value('update-date') || new Date().toISOString().slice(0,10);
+      text += `title: ${yaml(title)}\nsummary: ${yaml(summary)}\ndate: ${date}\nplatform: ${yaml(value('platform') || 'Website')}\n`;
+      if (value('url')) text += `url: ${yaml(value('url'))}\n`;
+      if (value('image')) text += `image: ${yaml(image)}\nimageAlt: ${yaml(alt)}\n`;
+      text += `featured: ${checked('featured')}\n---\n`;
+      filename = `${slug}.md`;
+    }
+    output.value = text;
+    filenameText.textContent = `Save as ${filename} in src/content/${type === 'update' ? 'updates' : type}/`;
+    outputCard.hidden = false;
+    outputCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  document.querySelector('[data-copy]')?.addEventListener('click', async () => {
+    await navigator.clipboard.writeText(output.value);
+  });
+  document.querySelector('[data-download]')?.addEventListener('click', () => {
+    const blob = new Blob([output.value], { type: 'text/markdown;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    link.click();
+    URL.revokeObjectURL(url);
+  });
+</script>

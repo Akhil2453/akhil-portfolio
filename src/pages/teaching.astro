@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { withBase } from '../utils/url';
+---
+<BaseLayout title="Teaching, Curriculum and Faculty Development | Akhil Arun Menon" description="Teaching portfolio across computing, management, data, electronics, robotics, curriculum design and faculty development.">
+  <PageHero eyebrow="Teaching and curriculum" title="Learning experiences designed for explanation, application and reflection" description="University teaching, curriculum architecture, online learning, practical design and educator capacity-building across multidisciplinary domains." />
+
+  <section class="section">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">Teaching philosophy</p>
+        <h2>Begin with meaning, move towards method, and finish with evidence</h2>
+        <p class="lead">Learners should understand why a concept matters, see how it works, apply it in a realistic context and explain what the result means.</p>
+        <p>For technical subjects, this often requires a deliberate progression from analogy and visual explanation to code, calculation, circuit, model or prototype. For management and research subjects, it requires cases, decisions, interpretation and defensible reasoning.</p>
+        <p>The same principle guides online learning. Slides, transcripts, practicals, reading materials and assessments must form one coherent learning path rather than separate deliverables.</p>
+      </div>
+      <div class="split-media"><img src={withBase('/images/teaching/maker-mindset-hero.webp')} alt="Akhil Arun Menon teaching a maker mindset and AI session" /></div>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container">
+      <p class="eyebrow">Subject portfolio</p>
+      <h2>Multidisciplinary teaching capability</h2>
+      <div class="grid grid-3" style="margin-top:2rem">
+        <article class="feature-card"><h3>Computing and Data</h3><p>Python, Java, databases, SQL, data science, data visualisation, analytics, cloud concepts and software development.</p></article>
+        <article class="feature-card"><h3>Electronics and Embedded Systems</h3><p>Basic and digital electronics, microcontrollers, embedded C, IoT system design, sensors and communication.</p></article>
+        <article class="feature-card"><h3>Robotics and Making</h3><p>Robot architecture, mechanisms, control systems, prototyping, CAD, competition preparation and makerspace practice.</p></article>
+        <article class="feature-card"><h3>Management and Research</h3><p>Statistics, business analytics, research methods, operations, accounting applications and academic research skills.</p></article>
+        <article class="feature-card"><h3>Emerging Technologies</h3><p>Artificial intelligence, blockchain, 5G concepts, AI agents, digital technologies and their educational applications.</p></article>
+        <article class="feature-card"><h3>Design Engineering</h3><p>Design thinking, activity-based learning, project development, process documentation and hands-on assessment.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container">
+      <p class="eyebrow">Curriculum architecture</p>
+      <h2>From course intent to complete delivery package</h2>
+      <div class="grid grid-4" style="margin-top:2rem">
+        <article class="feature-card"><div class="icon">1</div><h3>Define</h3><p>Course purpose, learner profile, outcomes, scope, prerequisites and assessment philosophy.</p></article>
+        <article class="feature-card"><div class="icon">2</div><h3>Sequence</h3><p>Units, topics, learning progression, theory-practical alignment and workload distribution.</p></article>
+        <article class="feature-card"><div class="icon">3</div><h3>Develop</h3><p>Slides, narration, reading material, practicals, activities, cases, question banks and rubrics.</p></article>
+        <article class="feature-card"><div class="icon">4</div><h3>Validate</h3><p>Academic review, outcome mapping, quality checks, faculty readiness and continuous improvement.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <div class="split-media"><img src={withBase('/images/teaching/educator-workshop-wide.webp')} alt="Educators participating in a workshop facilitated by Akhil Arun Menon" loading="lazy" /></div>
+      <div>
+        <p class="eyebrow">Faculty development</p>
+        <h2>Workshops that result in usable classroom artefacts</h2>
+        <p>Faculty-development sessions are designed around production and reflection. Participants may create a lesson plan, assessment rubric, AI-supported activity, prototype, question bank or teaching resource during the workshop.</p>
+        <p>Common workshop themes include:</p>
+        <ul class="prose"><li>Maker mindset and design thinking</li><li>Responsible AI for educators</li><li>Activity-based lesson planning</li><li>Hands-on assessment and rubric design</li><li>Power BI and data storytelling</li><li>IoT, embedded systems and robotics</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container">
+      <p class="eyebrow">Engagement formats</p>
+      <h2>Flexible programmes for different learning contexts</h2>
+      <div class="grid grid-3" style="margin-top:2rem">
+        <article class="feature-card"><h3>90-minute Masterclass</h3><p>Focused explanation, demonstration and guided discussion around one clearly defined concept.</p></article>
+        <article class="feature-card"><h3>3-hour Nano Workshop</h3><p>Experiential introduction designed to create curiosity and a first successful build or analytical output.</p></article>
+        <article class="feature-card"><h3>6-hour Intensive</h3><p>Deeper skill development with instruction, guided practice, feedback and a completed artefact.</p></article>
+        <article class="feature-card"><h3>Faculty Development Programme</h3><p>Multi-session preparation combining pedagogy, subject practice, activities, assessment and implementation planning.</p></article>
+        <article class="feature-card"><h3>Course Development</h3><p>End-to-end syllabus, lesson-plan, learning-material, practical and assessment development.</p></article>
+        <article class="feature-card"><h3>Programme Review</h3><p>Structured review of curriculum alignment, delivery readiness, resources, assessments and learner experience.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section"><div class="container cta-band"><p class="eyebrow">Collaborate</p><h2>Invite Akhil for a course, curriculum project, faculty programme, workshop or academic review.</h2><a class="btn btn-gold" href={withBase('/contact')}>Send an enquiry</a></div></section>
+</BaseLayout>

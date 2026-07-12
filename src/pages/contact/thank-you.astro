@@ -1,0 +1,7 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { withBase } from '../../utils/url';
+---
+<BaseLayout title="Thank You | Akhil Arun Menon" description="Your enquiry has been sent." noindex>
+  <section class="section"><div class="narrow" style="text-align:center;padding-block:5rem"><p class="eyebrow">Message received</p><h1>Thank you.</h1><p class="lead" style="margin-inline:auto">Your enquiry has been submitted. Acknowledgement will be sent to the email address provided.</p><div class="btn-row" style="justify-content:center"><a class="btn" href={withBase('/')}>Return home</a><a class="btn btn-outline" href="https://wa.me/918655752503">Send a WhatsApp message</a></div></div></section>
+</BaseLayout>

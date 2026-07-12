@@ -1,0 +1,88 @@
+---
+import Monogram from './Monogram.astro';
+import { withBase } from '../utils/url';
+const path = Astro.url.pathname;
+const navItems = [
+  ['About', '/about'],
+  ['REVA', '/reva'],
+  ['Projects', '/projects'],
+  ['Data Visualisation', '/data-visualisation'],
+  ['Robotics', '/robotics'],
+  ['Teaching', '/teaching'],
+  ['Blog', '/blog'],
+  ['Contact', '/contact']
+];
+const isActive = (href: string) => path.includes(href) && href !== '/';
+---
+<header class="site-header" data-header>
+  <div class="container header-inner">
+    <a class="brand" href={withBase('/')} aria-label="Akhil Arun Menon — home">
+      <Monogram size={42} />
+      <span><strong>Akhil Arun Menon</strong><small>Design • Technology • Education</small></span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" data-menu-toggle>
+      <span class="sr-only">Open navigation</span>
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="primary-navigation" class="primary-nav" aria-label="Primary navigation" data-nav>
+      {navItems.map(([label, href]) => (
+        <a href={withBase(href)} aria-current={isActive(href) ? 'page' : undefined}>{label}</a>
+      ))}
+      <button class="theme-toggle" type="button" aria-label="Toggle light and dark theme" data-theme-toggle>
+        <span aria-hidden="true" data-theme-icon>◐</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const menuButton = document.querySelector('[data-menu-toggle]');
+  const nav = document.querySelector('[data-nav]');
+  menuButton?.addEventListener('click', () => {
+    const open = menuButton.getAttribute('aria-expanded') === 'true';
+    menuButton.setAttribute('aria-expanded', String(!open));
+    nav?.classList.toggle('is-open', !open);
+  });
+
+  const root = document.documentElement;
+  const themeButton = document.querySelector('[data-theme-toggle]');
+  const saved = localStorage.getItem('theme');
+  const preferredDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const initial = saved ?? (preferredDark ? 'dark' : 'light');
+  root.dataset.theme = initial;
+  const setLabel = () => themeButton?.setAttribute('aria-label', `Switch to ${root.dataset.theme === 'dark' ? 'light' : 'dark'} theme`);
+  setLabel();
+  themeButton?.addEventListener('click', () => {
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    localStorage.setItem('theme', next);
+    setLabel();
+  });
+</script>
+
+<style>
+  .site-header { position: sticky; top: 0; z-index: 100; height: var(--header-height); background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+  .header-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .brand { display:flex; align-items:center; gap:.72rem; text-decoration:none; min-width:max-content; }
+  .brand img { border-radius: 10px; }
+  .brand span { display:grid; line-height:1.1; }
+  .brand strong { font-family:Georgia,serif; font-size:1rem; }
+  .brand small { margin-top:.25rem; color:var(--muted); font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; }
+  .primary-nav { display:flex; align-items:center; gap:.18rem; }
+  .primary-nav a { padding:.55rem .58rem; border-radius:9px; text-decoration:none; color:var(--muted); font-size:.84rem; font-weight:750; }
+  .primary-nav a:hover, .primary-nav a[aria-current='page'] { color:var(--ink); background:var(--surface-2); }
+  .theme-toggle { width:38px; height:38px; border:1px solid var(--border); border-radius:50%; background:var(--surface); color:var(--ink); cursor:pointer; }
+  .menu-toggle { display:none; width:42px; height:42px; border:1px solid var(--border); border-radius:10px; background:var(--surface); padding:9px; }
+  .menu-toggle span:not(.sr-only) { display:block; height:2px; background:var(--ink); margin:4px 0; }
+  @media (max-width: 1120px) {
+    .brand small { display:none; }
+    .primary-nav a { font-size:.78rem; padding-inline:.42rem; }
+  }
+  @media (max-width: 900px) {
+    .menu-toggle { display:block; }
+    .primary-nav { position:absolute; top:calc(100% + 1px); left:0; right:0; display:none; padding:1rem; background:var(--surface); border-bottom:1px solid var(--border); box-shadow:var(--shadow-soft); }
+    .primary-nav.is-open { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .primary-nav a { padding:.75rem; }
+    .theme-toggle { margin:.2rem .5rem; }
+  }
+</style>

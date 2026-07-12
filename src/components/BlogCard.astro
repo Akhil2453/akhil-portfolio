@@ -1,0 +1,15 @@
+---
+import { withBase } from '../utils/url';
+import { formatDate } from '../utils/format';
+const { post } = Astro.props;
+---
+<article class="card blog-card" data-blog-card data-search={`${post.data.title} ${post.data.description} ${post.data.tags.join(' ')}`.toLowerCase()}>
+  <a class="card-link" href={withBase(`/blog/${post.id}`)}>
+    <div class="card-media"><img src={withBase(post.data.image)} alt={post.data.imageAlt} loading="lazy" /></div>
+    <div class="card-body">
+      <div class="card-meta"><span>{post.data.category}</span><time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time></div>
+      <h3>{post.data.title}</h3>
+      <p class="text-muted">{post.data.description}</p>
+    </div>
+  </a>
+</article>

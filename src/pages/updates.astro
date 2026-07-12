@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { formatDate } from '../utils/format';
+import { withBase } from '../utils/url';
+const updates = (await getCollection('update')).sort((a,b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<BaseLayout title="Professional Updates | Akhil Arun Menon" description="Professional milestones, workshops, projects, LinkedIn references and programme updates from Akhil Arun Menon.">
+  <PageHero eyebrow="Professional updates" title="Work in progress, milestones and public reflections" description="A website-owned record of recent professional activity. LinkedIn posts can be mirrored here through lightweight content entries." />
+  <section class="section">
+    <div class="container">
+      <div class="timeline">
+        {updates.map((update) => (
+          <article class="timeline-item">
+            <time datetime={update.data.date.toISOString()}>{formatDate(update.data.date)}</time>
+            <h3>{update.data.title}</h3>
+            <p>{update.data.summary}</p>
+            {update.data.image && <img src={withBase(update.data.image)} alt={update.data.imageAlt ?? ''} style="max-width:640px;border-radius:var(--radius);margin:1rem 0" loading="lazy" />}
+            {update.data.url && <a class="btn btn-outline" href={update.data.url} target="_blank" rel="noopener">View original {update.data.platform} post</a>}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="section section-soft">
+    <div class="container grid grid-2">
+      <div><p class="eyebrow">Publishing workflow</p><h2>Mirror a LinkedIn post in under two minutes</h2><p>Paste the post URL, title, summary and date into the Content Studio. It generates the Markdown entry required by this page. Add the file to GitHub, commit it, and GitHub Pages redeploys the website.</p></div>
+      <div class="feature-card"><h3>Why this method?</h3><p>It keeps the website independent of restricted personal-post API access while preserving a consistent public record. The architecture remains ready for a future approved API or automation.</p><a class="btn" href={withBase('/studio')}>Open Content Studio</a></div>
+    </div>
+  </section>
+</BaseLayout>

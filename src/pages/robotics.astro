@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { withBase } from '../utils/url';
+---
+<BaseLayout title="Robotics and Innovation | Akhil Arun Menon" description="Competition robotics, makerspace operations, embedded systems, IoT and innovation mentoring by Akhil Arun Menon.">
+  <PageHero eyebrow="Robotics and innovation" title="Engineering mentorship from mechanism to match strategy" description="Competition robotics, makerspace systems, embedded platforms, IoT and hands-on technical learning." />
+
+  <section class="section">
+    <div class="container project-header">
+      <div>
+        <p class="eyebrow">Flagship work</p>
+        <h2>FIRST Global Challenge 2025 — Team India</h2>
+        <p class="lead">End-to-end mentoring across robot architecture, CAD, subsystem integration, testing, team preparation and competition strategy.</p>
+        <p>The final robot integrated a drivetrain, intake, feeder, shooter, climber, guides and servo-lock mechanisms. The design was developed around reliability, serviceability and game strategy rather than isolated mechanisms.</p>
+        <div class="tag-list"><span class="tag">REV Robotics</span><span class="tag">CAD</span><span class="tag">Mechanical Systems</span><span class="tag">Testing</span><span class="tag">Mentoring</span></div>
+        <p style="margin-top:1.5rem"><a class="btn" href={withBase('/projects/first-global-challenge-2025')}>View the full case study</a></p>
+      </div>
+      <div class="project-cover"><img src={withBase('/images/robotics/fgc-robot-labelled.webp')} alt="Labelled CAD rendering of the FIRST Global Challenge robot" /></div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container">
+      <p class="eyebrow">Mentoring framework</p>
+      <h2>Students learn the engineering process, not only the final build</h2>
+      <div class="grid grid-4" style="margin-top:2rem">
+        <article class="feature-card"><div class="icon">01</div><h3>Interpret</h3><p>Translate rules and constraints into subsystem requirements, match objectives and measurable design criteria.</p></article>
+        <article class="feature-card"><div class="icon">02</div><h3>Compare</h3><p>Evaluate alternative mechanisms using load, speed, control, reliability, weight and repairability.</p></article>
+        <article class="feature-card"><div class="icon">03</div><h3>Build & Test</h3><p>Prototype components, record failures, validate assumptions and integrate subsystems progressively.</p></article>
+        <article class="feature-card"><div class="icon">04</div><h3>Communicate</h3><p>Document the design, explain trade-offs, prepare match strategy and present the complete engineering story.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <div class="split-media"><img src={withBase('/images/profile/hands-on-maker.webp')} alt="Akhil Arun Menon working hands-on with robotics components" loading="lazy" /></div>
+      <div>
+        <p class="eyebrow">Makerspace practice</p>
+        <h2>Building environments where technical confidence can grow</h2>
+        <p>Effective makerspace operations require more than equipment. Learners need structured entry points, safe working practices, accessible documentation, prepared mentors, project checkpoints and a culture where iteration is normal.</p>
+        <p>My work has included daily lab operations, curriculum planning, mentor coordination, component readiness, equipment maintenance, safety protocols, workshop facilitation and competition preparation.</p>
+        <div class="tag-list"><span class="tag">Robotics</span><span class="tag">Drones</span><span class="tag">Electronics</span><span class="tag">3D Printing</span><span class="tag">AI Literacy</span><span class="tag">Design Thinking</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container">
+      <p class="eyebrow">Technical areas</p>
+      <h2>Hardware–software integration</h2>
+      <div class="grid grid-3" style="margin-top:2rem">
+        <article class="feature-card"><h3>Embedded Platforms</h3><p>ESP32, Arduino, Raspberry Pi, microcontrollers, motor drivers, servo systems and sensor integration.</p></article>
+        <article class="feature-card"><h3>Robot Mechanisms</h3><p>Drive systems, intakes, shooters, feeders, climbing mechanisms, manipulators and structural design.</p></article>
+        <article class="feature-card"><h3>Connected Systems</h3><p>Wi-Fi control, local web interfaces, telemetry, camera streaming, event logging and IoT alerts.</p></article>
+        <article class="feature-card"><h3>Programming</h3><p>Python, Java, Embedded C, web technologies and control-oriented application development.</p></article>
+        <article class="feature-card"><h3>CAD and Fabrication</h3><p>Mechanism visualisation, subsystem layouts, assembly planning, 3D printing and rapid prototyping.</p></article>
+        <article class="feature-card"><h3>Competition Systems</h3><p>Requirements, strategy, testing plans, driver practice, documentation, inspection and readiness reviews.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Engineering gallery</p>
+      <h2>From subsystem studies to final integration</h2>
+      <div class="gallery" style="margin-top:2rem">
+        <img src={withBase('/images/robotics/fgc-robot-final.webp')} alt="Final integrated competition robot CAD model" loading="lazy" />
+        <img src={withBase('/images/robotics/fgc-climber-detail.webp')} alt="Detailed climbing mechanism CAD model" loading="lazy" />
+        <img src={withBase('/images/robotics/fgc-intake-detail.webp')} alt="Detailed intake mechanism CAD model" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container metric-grid">
+      <div class="metric"><strong>33rd</strong><span>FIRST Global Challenge 2025 ranking</span></div>
+      <div class="metric"><strong>17th</strong><span>World Robot Olympiad national ranking in 2025</span></div>
+      <div class="metric"><strong>5</strong><span>core competition robot subsystems integrated</span></div>
+      <div class="metric"><strong>1</strong><span>continuous build–test–improve learning cycle</span></div>
+    </div>
+  </section>
+
+  <section class="section"><div class="container cta-band"><p class="eyebrow">Engagements</p><h2>Available for robotics programmes, competition mentoring, makerspace design and faculty-development workshops.</h2><a class="btn btn-gold" href={withBase('/contact')}>Discuss a robotics programme</a></div></section>
+</BaseLayout>

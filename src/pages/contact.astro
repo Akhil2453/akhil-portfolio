@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { absoluteUrl, withBase } from '../utils/url';
+const thankYouUrl = absoluteUrl('/contact/thank-you');
+---
+<BaseLayout title="Contact Akhil Arun Menon" description="Contact Akhil Arun Menon for academic roles, consulting, curriculum development, faculty training, robotics, data visualisation and speaking engagements.">
+  <PageHero eyebrow="Contact" title="Discuss a role, programme, workshop, project or collaboration" description="Based in Bengaluru and available for academic, programme, consulting, training, speaking and international opportunities." />
+  <section class="section">
+    <div class="container contact-layout">
+      <aside>
+        <p class="eyebrow">Direct contact</p>
+        <h2>Ways to connect</h2>
+        <div class="contact-list">
+          <a class="contact-item" href="mailto:akhil.menon94@gmail.com"><span aria-hidden="true">✉</span><div><strong>Email</strong><span>akhil.menon94@gmail.com</span></div></a>
+          <a class="contact-item" href="tel:+918655752503"><span aria-hidden="true">☎</span><div><strong>Phone</strong><span>+91 86557 52503</span></div></a>
+          <a class="contact-item" href="https://wa.me/918655752503" target="_blank" rel="noopener"><span aria-hidden="true">◉</span><div><strong>WhatsApp</strong><span>Message on WhatsApp</span></div></a>
+          <a class="contact-item" href="https://www.linkedin.com/in/akhilmenon24/" target="_blank" rel="noopener"><span aria-hidden="true">in</span><div><strong>LinkedIn</strong><span>linkedin.com/in/akhilmenon24</span></div></a>
+          <a class="contact-item" href="https://github.com/Akhil2453" target="_blank" rel="noopener"><span aria-hidden="true">&lt;/&gt;</span><div><strong>GitHub</strong><span>github.com/Akhil2453</span></div></a>
+        </div>
+        <p style="margin-top:1.5rem"><a class="btn btn-outline" href={withBase('/resume/Akhil-Arun-Menon-Resume.pdf')} download>Download résumé</a></p>
+      </aside>
+
+      <div class="card card-body">
+        <p class="eyebrow">Enquiry form</p>
+        <h2>Send the context</h2>
+        <form action="https://formsubmit.co/akhil.menon94@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="New enquiry from akhilmenon.in portfolio" />
+          <input type="hidden" name="_next" value={thankYouUrl} />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_autoresponse" value="Thank you for contacting Akhil Arun Menon. Your enquiry has been received. Akhil will review the context and respond directly." />
+          <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" />
+          <div class="form-grid">
+            <div class="form-group"><label for="name">Name</label><input class="form-control" id="name" name="name" required autocomplete="name" /></div>
+            <div class="form-group"><label for="email">Email</label><input class="form-control" id="email" type="email" name="email" required autocomplete="email" /></div>
+            <div class="form-group"><label for="phone">Phone / WhatsApp</label><input class="form-control" id="phone" name="phone" autocomplete="tel" /></div>
+            <div class="form-group"><label for="organisation">Organisation</label><input class="form-control" id="organisation" name="organisation" autocomplete="organization" /></div>
+            <div class="form-group full"><label for="enquiry">Enquiry type</label><select class="form-control" id="enquiry" name="enquiry_type" required><option value="">Select an enquiry type</option><option>Academic or university position</option><option>Senior programme-management role</option><option>Consulting</option><option>Speaking engagement</option><option>Faculty-development workshop</option><option>University collaboration</option><option>Curriculum-development assignment</option><option>Robotics programme</option><option>Data visualisation training</option><option>Media enquiry</option><option>Recruitment</option><option>Student mentoring</option><option>Meeting request</option><option>General enquiry</option></select></div>
+            <div class="form-group full"><label for="message">Context and expected outcome</label><textarea class="form-control" id="message" name="message" required placeholder="Please include the programme, audience, timeline, location or delivery mode, and the outcome you are seeking."></textarea></div>
+            <div class="form-group full"><label><input type="checkbox" name="consent" required /> I consent to the use of this information for responding to my enquiry.</label></div>
+            <div class="form-group full"><button class="btn btn-gold" type="submit">Send enquiry</button><span class="form-note">The first submission after deployment may require one-time email activation for the form service.</span></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+const projects = (await getCollection('project')).sort((a,b) => a.data.order - b.data.order);
+const categories = [...new Set(projects.map((p) => p.data.category))];
+---
+<BaseLayout title="Projects | Akhil Arun Menon" description="Selected academic programme, EdTech, robotics, data visualisation, IoT and prototyping projects by Akhil Arun Menon.">
+  <PageHero eyebrow="Portfolio" title="Projects that connect strategy with implementation" description="A curated record of academic programmes, learning systems, robotics, data, software and hands-on engineering work." />
+  <section class="section">
+    <div class="container">
+      <div class="filter-bar" aria-label="Project filters">
+        <input class="search-input" type="search" placeholder="Search projects, tools or themes" aria-label="Search projects" data-project-search />
+        <button class="filter-btn" type="button" aria-pressed="true" data-project-filter="all">All</button>
+        {categories.map((category) => <button class="filter-btn" type="button" aria-pressed="false" data-project-filter={category.toLowerCase()}>{category}</button>)}
+      </div>
+      <p class="text-muted" data-result-count>{projects.length} projects</p>
+      <div class="grid grid-3" style="margin-top:1rem" data-project-grid>{projects.map((project) => <ProjectCard project={project} />)}</div>
+      <div class="notice hidden" data-empty-state>No projects match the current search and filter.</div>
+    </div>
+  </section>
+</BaseLayout>
+<script is:inline>
+  const search = document.querySelector('[data-project-search]');
+  const cards = [...document.querySelectorAll('[data-project-card]')];
+  const filters = [...document.querySelectorAll('[data-project-filter]')];
+  const count = document.querySelector('[data-result-count]');
+  const empty = document.querySelector('[data-empty-state]');
+  let active = 'all';
+  const apply = () => {
+    const term = search?.value.trim().toLowerCase() ?? '';
+    let visible = 0;
+    cards.forEach((card) => {
+      const matchesText = card.dataset.search.includes(term);
+      const matchesCategory = active === 'all' || card.dataset.category === active;
+      const show = matchesText && matchesCategory;
+      card.classList.toggle('hidden', !show);
+      if (show) visible += 1;
+    });
+    if (count) count.textContent = `${visible} project${visible === 1 ? '' : 's'}`;
+    empty?.classList.toggle('hidden', visible !== 0);
+  };
+  search?.addEventListener('input', apply);
+  filters.forEach((button) => button.addEventListener('click', () => {
+    active = button.dataset.projectFilter;
+    filters.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+    apply();
+  }));
+</script>

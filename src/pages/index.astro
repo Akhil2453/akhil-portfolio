@@ -1,0 +1,131 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import BlogCard from '../components/BlogCard.astro';
+import DashboardMock from '../components/DashboardMock.astro';
+import { formatDate } from '../utils/format';
+import { withBase } from '../utils/url';
+
+const projects = (await getCollection('project')).sort((a,b) => a.data.order - b.data.order);
+const featuredProjects = projects.filter((p) => p.data.featured).slice(0,6);
+const posts = (await getCollection('blog')).filter((p) => !p.data.draft).sort((a,b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const updates = (await getCollection('update')).sort((a,b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0,3);
+---
+<BaseLayout>
+  <section class="hero">
+    <img class="hero-image" src={withBase('/images/teaching/maker-mindset-hero.webp')} alt="Akhil Arun Menon facilitating a maker mindset and AI workshop" />
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Bengaluru, India</p>
+        <h1>Building future-ready learning through <span>design, technology, data and hands-on practice.</span></h1>
+        <p class="lead">Academic programme strategist, Design Engineering educator, EdTech practitioner, robotics mentor and data visualisation specialist.</p>
+        <div class="btn-row">
+          <a class="btn btn-gold" href={withBase('/projects')}>Explore selected work</a>
+          <a class="btn btn-outline" href={withBase('/contact')}>Start a conversation</a>
+          <a class="btn btn-ghost" href={withBase('/resume/Akhil-Arun-Menon-Resume.pdf')} download>Download résumé ↓</a>
+        </div>
+      </div>
+      <aside class="hero-note">
+        <strong>Current work</strong>
+        Assistant Professor, School of Design Engineering, REVA University—developing curriculum, faculty preparation and hands-on assessment systems.
+      </aside>
+    </div>
+  </section>
+
+  <section class="section-sm section-soft" aria-label="Professional impact summary">
+    <div class="container metric-grid">
+      <div class="metric"><strong>10+</strong><span>years across education, technology and programme development</span></div>
+      <div class="metric"><strong>40+</strong><span>university programmes supported through curriculum and content systems</span></div>
+      <div class="metric"><strong>500+</strong><span>academic assets managed through structured workflows and reporting</span></div>
+      <div class="metric"><strong>50+</strong><span>educators supported through mentoring and capacity-building</span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">Current focus</p>
+        <h2>Design Engineering as an operating system for learning</h2>
+        <p class="lead">At REVA University, the work centres on making activity-based education executable across curriculum, classroom practice and assessment.</p>
+        <p>The emphasis is on usable academic systems: lesson plans that teachers can facilitate, assessments that capture process and evidence, and learning environments that support ideas, prototypes and public project display.</p>
+        <div class="tag-list">
+          <span class="tag">Curriculum Development</span><span class="tag">Teacher Training</span><span class="tag">Hands-on Assessment</span><span class="tag">Design Spark</span><span class="tag">Idea Lab</span>
+        </div>
+        <p style="margin-top:1.5rem"><a class="btn" href={withBase('/reva')}>View the REVA work profile</a></p>
+      </div>
+      <div class="split-media"><img src={withBase('/images/teaching/educator-workshop-interactive.webp')} alt="Akhil Arun Menon leading an interactive educator session" loading="lazy" /></div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container">
+      <p class="eyebrow">Professional proposition</p>
+      <h2>Four connected areas of practice</h2>
+      <p class="lead">The work sits at the intersection of academic design, programme execution, engineering practice and evidence-based decision-making.</p>
+      <div class="grid grid-4" style="margin-top:2rem">
+        <article class="feature-card"><div class="icon">01</div><h3>Academic Programme Strategy</h3><p>Curriculum architecture, course files, lesson planning, outcome mapping and implementation frameworks.</p></article>
+        <article class="feature-card"><div class="icon">02</div><h3>EdTech & Faculty Development</h3><p>Online and blended-learning systems, content operations, faculty preparation and scalable delivery workflows.</p></article>
+        <article class="feature-card"><div class="icon">03</div><h3>Robotics & Innovation</h3><p>Competition mentoring, subsystem design, makerspace operations, IoT and embedded-system prototyping.</p></article>
+        <article class="feature-card"><div class="icon">04</div><h3>Data Visualisation</h3><p>Power BI, Excel, Python and SQL for dashboards that turn operational data into decisions.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Selected work</p>
+      <h2>Projects with academic, technical and institutional impact</h2>
+      <p class="lead">Each case study documents the problem, operating context, approach, tools and outcomes without disclosing confidential client information.</p>
+      <div class="grid grid-3" style="margin-top:2rem">{featuredProjects.map((project) => <ProjectCard project={project} />)}</div>
+      <p style="margin-top:2rem"><a class="btn btn-outline" href={withBase('/projects')}>View all projects</a></p>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">Data visualisation portfolio</p>
+        <h2>From raw data to an explainable decision path</h2>
+        <p class="lead">The first public case study uses simulated and open data to demonstrate data preparation, modelling, DAX, visual design and business interpretation.</p>
+        <p>The Candy Sales portfolio is structured across executive performance, product margin and profitability, and target-versus-geography analysis.</p>
+        <div class="btn-row"><a class="btn" href={withBase('/data-visualisation/candy-sales')}>Open the case study</a><a class="btn btn-outline" href={withBase('/data-visualisation')}>View the visualisation lab</a></div>
+      </div>
+      <DashboardMock />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Writing and reflection</p>
+      <h2>Latest articles</h2>
+      <div class="grid grid-3" style="margin-top:2rem">{posts.slice(0,3).map((post) => <BlogCard post={post} />)}</div>
+      <p style="margin-top:2rem"><a class="btn btn-outline" href={withBase('/blog')}>Read the blog</a></p>
+    </div>
+  </section>
+
+  <section class="section-sm section-dark">
+    <div class="container">
+      <p class="eyebrow">Professional updates</p>
+      <div class="grid grid-3">
+        {updates.map((update) => (
+          <article class="feature-card">
+            <span class="tag">{update.data.platform}</span>
+            <h3 style="margin-top:1rem">{update.data.title}</h3>
+            <p>{update.data.summary}</p>
+            <time class="text-small" datetime={update.data.date.toISOString()}>{formatDate(update.data.date)}</time>
+          </article>
+        ))}
+      </div>
+      <p style="margin-top:2rem"><a class="btn btn-outline" href={withBase('/updates')}>View all updates</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container cta-band">
+      <p class="eyebrow">Collaborate</p>
+      <h2>Available for academic roles, programme strategy, curriculum projects, faculty development, robotics initiatives and data visualisation engagements.</h2>
+      <div class="btn-row"><a class="btn btn-gold" href={withBase('/contact')}>Contact Akhil</a><a class="btn btn-outline" href="https://www.linkedin.com/in/akhilmenon24/" target="_blank" rel="noopener">Connect on LinkedIn</a></div>
+    </div>
+  </section>
+</BaseLayout>

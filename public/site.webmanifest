@@ -1,0 +1,16 @@
+{
+  "name": "Akhil Arun Menon",
+  "short_name": "AAM",
+  "description": "Academic programme strategist, design engineering educator, robotics mentor and data visualisation practitioner.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#071827",
+  "theme_color": "#071827",
+  "icons": [
+    {
+      "src": "images/brand/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

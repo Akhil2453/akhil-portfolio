@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import BlogCard from '../../components/BlogCard.astro';
+const showDrafts = process.env.NODE_ENV !== 'production' || process.env.SHOW_DRAFTS === 'true';
+const posts = (await getCollection('blog')).filter((p) => showDrafts || !p.data.draft).sort((a,b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+<BaseLayout title="Blog and Insights | Akhil Arun Menon" description="Articles on Design Engineering education, activity-based learning, EdTech, data visualisation, robotics, AI in education and academic programme development.">
+  <PageHero eyebrow="Blog and insights" title="Notes from the intersection of education, technology, design and data" description="Practical reflections, frameworks, case studies and professional learning from academic programmes and technical projects." />
+  <section class="section">
+    <div class="container">
+      <div class="filter-bar"><input class="search-input" type="search" placeholder="Search articles by topic or keyword" aria-label="Search articles" data-blog-search /></div>
+      <p class="text-muted" data-blog-count>{posts.length} article{posts.length === 1 ? '' : 's'}</p>
+      <div class="grid grid-3" style="margin-top:1rem">{posts.map((post) => <div data-blog-wrapper data-search={`${post.data.title} ${post.data.description} ${post.data.tags.join(' ')}`.toLowerCase()}><BlogCard post={post} />{post.data.draft && <span class="tag" style="margin-top:.5rem">Draft preview</span>}</div>)}</div>
+      <div class="notice hidden" data-blog-empty>No articles match the current search.</div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container contact-layout">
+      <div>
+        <p class="eyebrow">Email updates</p>
+        <h2>Receive new articles and portfolio updates</h2>
+        <p class="lead">Subscription requests are sent directly to Akhil. A dedicated mailing platform can be connected later without changing the page design.</p>
+      </div>
+      <form class="card card-body" action="https://formsubmit.co/akhil.menon94@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New website newsletter subscription" />
+        <input type="hidden" name="_autoresponse" value="Thank you for subscribing to Akhil Arun Menon's professional updates. Your request has been received." />
+        <input type="hidden" name="_template" value="table" />
+        <div class="form-grid">
+          <div class="form-group"><label for="subscriber-name">Name</label><input class="form-control" id="subscriber-name" name="name" required /></div>
+          <div class="form-group"><label for="subscriber-email">Email</label><input class="form-control" id="subscriber-email" type="email" name="email" required /></div>
+          <div class="form-group full"><label for="subscriber-interest">Primary interest</label><select class="form-control" id="subscriber-interest" name="interest"><option>Design Engineering education</option><option>Academic programme development</option><option>Data visualisation</option><option>Robotics and IoT</option><option>EdTech and AI in education</option></select></div>
+          <div class="form-group full"><button class="btn btn-gold" type="submit">Subscribe</button><span class="form-note">No automated marketing is sent until a mailing service is connected.</span></div>
+        </div>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
+<script is:inline>
+  const input = document.querySelector('[data-blog-search]');
+  const wrappers = [...document.querySelectorAll('[data-blog-wrapper]')];
+  const count = document.querySelector('[data-blog-count]');
+  const empty = document.querySelector('[data-blog-empty]');
+  const filter = () => {
+    const term = input?.value.trim().toLowerCase() ?? '';
+    let visible = 0;
+    wrappers.forEach((wrapper) => {
+      const show = wrapper.dataset.search.includes(term);
+      wrapper.classList.toggle('hidden', !show);
+      if (show) visible += 1;
+    });
+    if (count) count.textContent = `${visible} article${visible === 1 ? '' : 's'}`;
+    empty?.classList.toggle('hidden', visible !== 0);
+  };
+  input?.addEventListener('input', filter);
+</script>

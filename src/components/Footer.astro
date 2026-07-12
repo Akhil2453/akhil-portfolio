@@ -1,0 +1,45 @@
+---
+import Monogram from './Monogram.astro';
+import { withBase } from '../utils/url';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-brand"><Monogram size={50} /><div><strong>Akhil Arun Menon</strong><span>Academic programmes, technology, data and hands-on learning.</span></div></div>
+      <p class="copyright">© {year} Akhil Arun Menon. All rights reserved.</p>
+    </div>
+    <div>
+      <h3>Explore</h3>
+      <a href={withBase('/projects')}>Projects</a>
+      <a href={withBase('/data-visualisation')}>Data visualisation</a>
+      <a href={withBase('/blog')}>Blog</a>
+      <a href={withBase('/updates')}>Professional updates</a>
+    </div>
+    <div>
+      <h3>Connect</h3>
+      <a href="mailto:akhil.menon94@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/akhilmenon24/" target="_blank" rel="me noopener">LinkedIn</a>
+      <a href="https://github.com/Akhil2453" target="_blank" rel="me noopener">GitHub</a>
+      <a href="https://wa.me/918655752503" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+    <div>
+      <h3>Maintain</h3>
+      <a href={withBase('/studio')}>Content Studio</a>
+      <a href={withBase('/resume/Akhil-Arun-Menon-Resume.pdf')} download>Download résumé</a>
+      <a href={withBase('/privacy')}>Privacy</a>
+    </div>
+  </div>
+</footer>
+<style>
+  .site-footer { padding:3.5rem 0 2rem; color:#dbe6ec; background:var(--navy-950); }
+  .footer-grid { display:grid; grid-template-columns:2fr repeat(3,1fr); gap:2rem; }
+  .footer-brand { display:flex; gap:.9rem; align-items:center; }
+  .footer-brand strong { display:block; font:700 1.2rem Georgia,serif; color:#fff; }
+  .footer-brand span { color:#9eb1be; font-size:.9rem; }
+  .site-footer h3 { color:var(--gold-400); font-family:inherit; font-size:.82rem; letter-spacing:.1em; text-transform:uppercase; }
+  .site-footer a { display:block; margin:.48rem 0; color:#c9d6de; text-decoration:none; }
+  .site-footer a:hover { color:#fff; }
+  .copyright { margin:1.5rem 0 0; color:#8196a4; font-size:.82rem; }
+  @media(max-width:760px){.footer-grid{grid-template-columns:1fr 1fr}.footer-grid>div:first-child{grid-column:1/-1}}
+</style>
