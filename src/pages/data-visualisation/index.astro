@@ -1,41 +1,137 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
-import DashboardMock from '../../components/DashboardMock.astro';
 import { withBase } from '../../utils/url';
 ---
-<BaseLayout title="Data Visualisation Portfolio | Akhil Arun Menon" description="Power BI, Excel, Python and SQL portfolio covering sales, HR, marketing and academic analytics.">
-  <PageHero eyebrow="Data visualisation" title="Dashboards designed around decisions, not decoration" description="A developing portfolio of end-to-end case studies covering data preparation, modelling, measures, visual design, interpretation and action." />
+
+<BaseLayout
+  title="Data Visualisation Portfolio | Akhil Arun Menon"
+  description="A developing Power BI, Excel, Python and SQL portfolio covering sales, HR, marketing and academic analytics."
+>
+  <PageHero
+    eyebrow="Data visualisation"
+    title="Dashboards designed around decisions, not decoration"
+    description="A growing portfolio of end-to-end analytics case studies covering data preparation, modelling, measures, visual design and interpretation."
+  />
+
+  <section class="section-sm section-soft">
+    <div class="container">
+      <div class="notice">
+        <strong>Portfolio update:</strong>
+        Dashboard case studies are currently being developed. The first
+        complete Power BI case study will be added during this week.
+      </div>
+    </div>
+  </section>
 
   <section class="section">
     <div class="container split">
       <div>
         <p class="eyebrow">Portfolio approach</p>
-        <h2>Show the complete analytical process</h2>
-        <p class="lead">Every case study is structured to demonstrate how raw records become a reliable model and how the model becomes a decision-oriented dashboard.</p>
+
+        <h2>Showing the complete analytical process</h2>
+
+        <p class="lead">
+          The portfolio is being structured to demonstrate how raw data
+          becomes a reliable analytical model and how that model becomes a
+          decision-oriented report.
+        </p>
+
         <ol class="prose">
           <li>Business or academic problem definition</li>
-          <li>Data inventory and quality assessment</li>
-          <li>Transformation and relationship design</li>
-          <li>Measure development and validation</li>
-          <li>Dashboard layout and interaction design</li>
+          <li>Dataset inventory and quality assessment</li>
+          <li>Power Query transformation</li>
+          <li>Data modelling and relationship design</li>
+          <li>DAX measure development and validation</li>
+          <li>Dashboard interaction and visual hierarchy</li>
           <li>Insights, limitations and recommended actions</li>
         </ol>
-        <p>Confidential information is replaced with simulated or open data. Dashboard samples are presented for viewing and interaction but are not offered as downloadable source files.</p>
+
+        <p>
+          Confidential information will be replaced with simulated or
+          publicly available data.
+        </p>
       </div>
-      <DashboardMock />
+
+      <article class="dashboard-shell">
+        <div class="dashboard-topbar">
+          <strong>Case-study format</strong>
+          <span>Portfolio standard</span>
+        </div>
+
+        <div class="dashboard-body">
+          <div class="grid grid-2">
+            <article class="feature-card">
+              <span class="tag">01</span>
+              <h3 style="margin-top:1rem">Problem</h3>
+              <p>The decision, audience and analytical questions.</p>
+            </article>
+
+            <article class="feature-card">
+              <span class="tag">02</span>
+              <h3 style="margin-top:1rem">Model</h3>
+              <p>Transformations, relationships and measures.</p>
+            </article>
+
+            <article class="feature-card">
+              <span class="tag">03</span>
+              <h3 style="margin-top:1rem">Report</h3>
+              <p>Dashboard screenshots and interaction design.</p>
+            </article>
+
+            <article class="feature-card">
+              <span class="tag">04</span>
+              <h3 style="margin-top:1rem">Insights</h3>
+              <p>Findings, limitations and recommended actions.</p>
+            </article>
+          </div>
+        </div>
+      </article>
     </div>
   </section>
 
   <section class="section section-dark">
     <div class="container">
       <p class="eyebrow">Tools</p>
+
       <h2>Analytics and reporting capabilities</h2>
+
       <div class="grid grid-4" style="margin-top:2rem">
-        <article class="feature-card"><div class="icon">P</div><h3>Power BI</h3><p>Power Query, data modelling, DAX, drill-through, bookmarks, tooltips and publish-ready report design.</p></article>
-        <article class="feature-card"><div class="icon">E</div><h3>Excel</h3><p>Structured models, formulas, PivotTables, charts, validation, scenario views and management dashboards.</p></article>
-        <article class="feature-card"><div class="icon">Py</div><h3>Python</h3><p>Data preparation, exploratory analysis and visualisation using pandas, NumPy and Matplotlib.</p></article>
-        <article class="feature-card"><div class="icon">SQL</div><h3>SQL</h3><p>Data extraction, aggregation, joins, validation queries and reporting views for analytical models.</p></article>
+        <article class="feature-card">
+          <div class="icon">P</div>
+          <h3>Power BI</h3>
+          <p>
+            Power Query, dimensional modelling, DAX, drill-through,
+            bookmarks, tooltips and report design.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="icon">E</div>
+          <h3>Excel</h3>
+          <p>
+            Structured datasets, formulas, PivotTables, visualisation,
+            validation and management reporting.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="icon">Py</div>
+          <h3>Python</h3>
+          <p>
+            Data preparation, exploratory analysis and visualisation using
+            pandas, NumPy and Matplotlib.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="icon">SQL</div>
+          <h3>SQL</h3>
+          <p>
+            Extraction, aggregation, joins, validation queries and reporting
+            views for analytical models.
+          </p>
+        </article>
       </div>
     </div>
   </section>
@@ -43,39 +139,140 @@ import { withBase } from '../../utils/url';
   <section class="section section-soft">
     <div class="container project-header">
       <div>
-        <span class="tag">Featured case study</span>
-        <p class="eyebrow" style="margin-top:1.2rem">Sales analytics</p>
+        <span class="tag">In development · Publishing this week</span>
+
+        <p class="eyebrow" style="margin-top:1.2rem">
+          First case study
+        </p>
+
         <h2>Candy Sales Performance and Profitability</h2>
-        <p class="lead">A multi-table Power BI case study covering executive performance, product margin, targets, geography and shipping analysis.</p>
-        <div class="tag-list"><span class="tag">Power Query</span><span class="tag">Star Schema</span><span class="tag">DAX</span><span class="tag">Targets</span><span class="tag">Geospatial Analysis</span></div>
-        <p style="margin-top:1.5rem"><a class="btn" href={withBase('/data-visualisation/candy-sales')}>Open full case study</a></p>
+
+        <p class="lead">
+          A Power BI case study covering executive sales performance, product
+          profitability, targets, geography and operational analysis.
+        </p>
+
+        <div class="tag-list">
+          <span class="tag">Power Query</span>
+          <span class="tag">Data Model</span>
+          <span class="tag">DAX</span>
+          <span class="tag">Sales Analytics</span>
+          <span class="tag">Data Storytelling</span>
+        </div>
+
+        <p style="margin-top:1.5rem">
+          <a
+            class="btn"
+            href={withBase('/data-visualisation/candy-sales')}
+          >
+            View development status
+          </a>
+        </p>
       </div>
-      <div class="project-cover"><img src={withBase('/images/brand/og-default.jpg')} alt="Data visualisation case study cover" /></div>
+
+      <div class="project-cover">
+        <img
+          src={withBase('/images/brand/og-default.png')}
+          alt="Data visualisation portfolio case study"
+        />
+      </div>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <p class="eyebrow">Use cases</p>
-      <h2>Four portfolio tracks</h2>
+      <p class="eyebrow">Portfolio areas</p>
+
+      <h2>Four analytics tracks</h2>
+
       <div class="grid grid-4" style="margin-top:2rem">
-        <article class="feature-card"><h3>HR Analytics</h3><p>Headcount, attrition, recruitment, diversity, learning, attendance and workforce planning.</p></article>
-        <article class="feature-card"><h3>Sales Analytics</h3><p>Revenue, margin, targets, products, customers, geography, forecasting and pipeline health.</p></article>
-        <article class="feature-card"><h3>Marketing Analytics</h3><p>Campaign performance, conversion, channel efficiency, customer acquisition and engagement.</p></article>
-        <article class="feature-card"><h3>Academic Analytics</h3><p>Learner progress, assessments, attendance, course readiness, faculty workload and programme operations.</p></article>
+        <article class="feature-card">
+          <span class="tag">Planned</span>
+          <h3 style="margin-top:1rem">HR Analytics</h3>
+          <p>
+            Headcount, attrition, recruitment, learning, attendance and
+            workforce planning.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <span class="tag">In development</span>
+          <h3 style="margin-top:1rem">Sales Analytics</h3>
+          <p>
+            Revenue, margin, targets, products, customers, geography and
+            performance trends.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <span class="tag">Planned</span>
+          <h3 style="margin-top:1rem">Marketing Analytics</h3>
+          <p>
+            Campaign performance, conversion, channel efficiency,
+            acquisition and engagement.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <span class="tag">Planned</span>
+          <h3 style="margin-top:1rem">Academic Analytics</h3>
+          <p>
+            Learner progress, assessments, attendance, readiness, faculty
+            workload and programme operations.
+          </p>
+        </article>
       </div>
-      <p style="margin-top:2rem"><a class="btn btn-outline" href={withBase('/data-visualisation/dashboard-roadmap')}>View the 10-dashboard build roadmap</a></p>
+
+      <div class="notice" style="margin-top:2rem">
+        <strong>Coming shortly:</strong>
+        completed dashboard case studies will be added here as they are
+        developed and documented.
+      </div>
     </div>
   </section>
 
   <section class="section section-soft">
     <div class="container">
-      <p class="eyebrow">Interactive reports</p>
-      <h2>Embedded dashboard gallery</h2>
-      <p class="lead">Published Power BI reports will appear here using public or securely shared embed links. The website already includes responsive containers for the reports.</p>
-      <div class="grid grid-2" style="margin-top:2rem">
-        <article class="dashboard-shell"><div class="dashboard-topbar"><strong>Sales performance</strong><span>Embed slot 01</span></div><div class="dashboard-body"><div class="notice"><strong>In development:</strong> the Power BI report will be embedded after publication.</div></div></article>
-        <article class="dashboard-shell"><div class="dashboard-topbar"><strong>Academic programme health</strong><span>Embed slot 02</span></div><div class="dashboard-body"><div class="notice"><strong>Planned:</strong> simulated programme data will be used to protect institutional information.</div></div></article>
+      <p class="eyebrow">Publication format</p>
+
+      <h2>How completed dashboards will be presented</h2>
+
+      <div class="grid grid-4" style="margin-top:2rem">
+        <article class="feature-card">
+          <div class="icon">01</div>
+          <h3>Dashboard Views</h3>
+          <p>
+            High-resolution screenshots of the complete report and its main
+            analytical pages.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="icon">02</div>
+          <h3>Model Explanation</h3>
+          <p>
+            Data preparation, relationship structure and important design
+            decisions.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="icon">03</div>
+          <h3>DAX Measures</h3>
+          <p>
+            Selected calculations with explanations of their analytical
+            purpose.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="icon">04</div>
+          <h3>Findings</h3>
+          <p>
+            Business or academic insights, limitations and recommended
+            actions.
+          </p>
+        </article>
       </div>
     </div>
   </section>
@@ -83,8 +280,18 @@ import { withBase } from '../../utils/url';
   <section class="section">
     <div class="container cta-band">
       <p class="eyebrow">Training and consulting</p>
-      <h2>Available for Power BI training, dashboard design, academic analytics and data-storytelling assignments.</h2>
-      <a class="btn btn-gold" href={withBase('/contact')}>Discuss a data engagement</a>
+
+      <h2>
+        Available for Power BI training, dashboard design, academic analytics
+        and data-storytelling assignments.
+      </h2>
+
+      <a
+        class="btn btn-gold"
+        href={withBase('/contact')}
+      >
+        Discuss a data engagement
+      </a>
     </div>
   </section>
 </BaseLayout>

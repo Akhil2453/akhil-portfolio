@@ -6,7 +6,7 @@ period: "2022 – Present"
 role: "Dashboard Designer and Programme Analyst"
 status: "active"
 featured: true
-image: "/images/brand/og-default.jpg"
+image: "/images/brand/og-default.png"
 imageAlt: "Akhil Arun Menon personal brand graphic"
 tools: ["Power BI", "Excel", "Data Modelling", "Project Analytics", "Reporting"]
 outcomes:

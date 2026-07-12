@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import BlogCard from '../components/BlogCard.astro';
-import DashboardMock from '../components/DashboardMock.astro';
+
 import { formatDate } from '../utils/format';
 import { withBase } from '../utils/url';
 
@@ -82,18 +82,90 @@ const updates = (await getCollection('update')).sort((a,b) => b.data.date.valueO
     </div>
   </section>
 
-  <section class="section section-soft">
-    <div class="container split">
-      <div>
-        <p class="eyebrow">Data visualisation portfolio</p>
-        <h2>From raw data to an explainable decision path</h2>
-        <p class="lead">The first public case study uses simulated and open data to demonstrate data preparation, modelling, DAX, visual design and business interpretation.</p>
-        <p>The Candy Sales portfolio is structured across executive performance, product margin and profitability, and target-versus-geography analysis.</p>
-        <div class="btn-row"><a class="btn" href={withBase('/data-visualisation/candy-sales')}>Open the case study</a><a class="btn btn-outline" href={withBase('/data-visualisation')}>View the visualisation lab</a></div>
+<section class="section section-soft">
+  <div class="container split">
+    <div>
+      <span class="tag">Portfolio build in progress</span>
+
+      <p class="eyebrow" style="margin-top:1.25rem">
+        Data visualisation portfolio
+      </p>
+
+      <h2>
+        Building decision-oriented dashboard case studies
+      </h2>
+
+      <p class="lead">
+        A new portfolio of Power BI case studies is currently being developed
+        across sales, HR, marketing and academic analytics.
+      </p>
+
+      <p>
+        Each case study will document the complete analytical process:
+        problem definition, data preparation, modelling, DAX development,
+        report design, interpretation and recommended actions.
+      </p>
+
+      <p>
+        The first completed dashboard case study will be published during
+        this week.
+      </p>
+
+      <div class="tag-list">
+        <span class="tag">Power BI Desktop</span>
+        <span class="tag">Power Query</span>
+        <span class="tag">DAX</span>
+        <span class="tag">Data Modelling</span>
+        <span class="tag">Data Storytelling</span>
       </div>
-      <DashboardMock />
+
+      <div class="btn-row" style="margin-top:1.5rem">
+        <a
+          class="btn"
+          href={withBase('/data-visualisation')}
+        >
+          View data visualisation portfolio
+        </a>
+
+        <a
+          class="btn btn-outline"
+          href={withBase('/contact')}
+        >
+          Discuss data visualisation training
+        </a>
+      </div>
     </div>
-  </section>
+
+    <article class="dashboard-shell">
+      <div class="dashboard-topbar">
+        <strong>Portfolio status</strong>
+        <span>Updating this week</span>
+      </div>
+
+      <div class="dashboard-body">
+        <div class="notice">
+          <strong>Under development:</strong>
+          The first complete Power BI case study is being prepared for
+          publication.
+        </div>
+
+        <div class="grid grid-2" style="margin-top:1.5rem">
+          <div class="feature-card">
+            <span class="tag">01</span>
+            <h3 style="margin-top:1rem">Sales Analytics</h3>
+            <p>Performance, profitability, targets and geography.</p>
+          </div>
+
+          <div class="feature-card">
+            <span class="tag">02</span>
+            <h3 style="margin-top:1rem">Academic Analytics</h3>
+            <p>Performance, readiness, workload and programme operations.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
 
   <section class="section">
     <div class="container">

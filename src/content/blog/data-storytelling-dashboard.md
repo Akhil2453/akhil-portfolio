@@ -4,7 +4,7 @@ description: "A dashboard should guide attention, explain change and support act
 pubDate: 2026-07-08
 category: "Data Visualisation"
 tags: ["Power BI", "Data Storytelling", "Dashboard Design", "Analytics"]
-image: "/images/brand/og-default.jpg"
+image: "/images/brand/og-default.png"
 imageAlt: "Akhil Arun Menon personal brand graphic for data storytelling"
 draft: false
 featured: false

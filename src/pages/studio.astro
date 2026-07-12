@@ -96,7 +96,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     const title = value('title');
     const slug = value('slug') || slugify(title);
     const summary = value('summary');
-    const image = value('image') || '/images/brand/og-default.jpg';
+    const image = value('image') || '/images/brand/og-default.png';
     const alt = value('image-alt') || title;
     let text = '---\n';
     if (type === 'project') {
