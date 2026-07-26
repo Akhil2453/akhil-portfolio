@@ -1,0 +1,546 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { withBase } from '../../utils/url';
+
+const sessionDate = '26 July 2026';
+const organiser = 'College-Vidya';
+const audience =
+  'Doctoral scholars, DBA aspirants, faculty members and working professionals';
+
+const presentationUrl = withBase(
+  '/resources/ai-enabled-doctorate/AI_Enabled_Doctorate_Presentation.pdf'
+);
+
+const resources = [
+  {
+    title: 'Participant Workbook',
+    description:
+      'A guided workbook covering doctoral thinking, PhD–DBA alignment, problem framing, research-question refinement, literature planning, ethics and a structured action plan.',
+    file: '/resources/ai-enabled-doctorate/Participant_Workbook.pdf',
+    event: 'resource_workbook_download',
+    label: 'Download Workbook'
+  },
+  {
+    title: 'AI Research Prompt Library',
+    description:
+      'A practical collection of AI-assisted research prompts for problem framing, literature discovery, methodology, analysis, academic writing, integrity and viva preparation.',
+    file: '/resources/ai-enabled-doctorate/AI_Research_Prompt_Library.pdf',
+    event: 'prompt_library_download',
+    label: 'Download Prompt Library'
+  },
+  {
+    title: 'AI Research Toolkit',
+    description:
+      'A guide to scholarly databases, AI-assisted research tools, reference management, verification, confidentiality, disclosure and quality control.',
+    file: '/resources/ai-enabled-doctorate/AI_Research_Toolkit.pdf',
+    event: 'research_toolkit_download',
+    label: 'Download Toolkit'
+  }
+];
+
+const featuredPrompt = `I am a professional working in [industry/function/context].
+
+A recurring organisational challenge I observe is [problem].
+
+Help me develop five possible DBA-level research questions.
+
+For each question, provide:
+1. The central concepts or variables
+2. Relevant stakeholders
+3. Practical significance
+4. An appropriate scope
+5. A suitable broad research approach
+
+Do not invent evidence or citations. Flag assumptions and ask up to three clarification questions before generating the final options.`;
+---
+
+<BaseLayout
+  title="The AI-enabled Doctorate — Research Resource Hub | Akhil Menon"
+  description="Access the webinar presentation, participant workbook, AI research prompt library and responsible-AI research toolkit."
+  image="/images/brand/og-default.png"
+>
+  <PageHero
+    eyebrow="Webinar resource hub"
+    title="The AI-enabled Doctorate"
+    description="Research smarter. Think deeper. Create impact."
+  />
+
+  <section class="section-sm section-soft">
+    <div class="container">
+      <div class="session-summary">
+        <div>
+          <strong>Session delivered by</strong>
+          <span>Akhil Arun Menon</span>
+        </div>
+
+        <div>
+          <strong>Date</strong>
+          <span>{sessionDate}</span>
+        </div>
+
+        <div>
+          <strong>Organised by</strong>
+          <span>{organiser}</span>
+        </div>
+
+        <div>
+          <strong>Audience</strong>
+          <span>{audience}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container narrow-intro">
+      <p class="eyebrow">Session context</p>
+
+      <h2>
+        Converting professional experience into credible doctoral research
+      </h2>
+
+      <p class="lead">
+        AI can accelerate parts of research. It cannot replace the scholar’s
+        judgement, originality, ethical responsibility or critical thinking.
+      </p>
+
+      <p>
+        This resource hub continues the learning from the session and provides
+        practical materials for identifying researchable professional
+        problems, developing preliminary research questions, planning
+        literature searches and creating a responsible AI-enabled research
+        workflow.
+      </p>
+
+      <blockquote>
+        AI can make you faster. Only you can make your research meaningful.
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container">
+      <p class="eyebrow">Session presentation</p>
+
+      <h2>View the complete presentation</h2>
+
+      <p class="presentation-note">
+        Use the viewer below or open the presentation in a separate browser
+        tab.
+      </p>
+
+      <div class="presentation-viewer">
+        <iframe
+          src={`${presentationUrl}#view=FitH`}
+          title="The AI-enabled Doctorate webinar presentation"
+          loading="lazy"
+        ></iframe>
+      </div>
+
+      <div class="btn-row">
+        <a
+          class="btn btn-gold"
+          href={presentationUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-event="presentation_view"
+        >
+          Open Presentation
+        </a>
+
+        <a
+          class="btn btn-outline"
+          href={presentationUrl}
+          download
+          data-event="presentation_download"
+        >
+          Download Presentation
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container">
+      <p class="eyebrow">Webinar resources</p>
+
+      <h2>Continue your doctoral research journey</h2>
+
+      <div class="resource-grid">
+        {
+          resources.map((resource) => (
+            <article class="resource-card">
+              <span class="resource-format">PDF Resource</span>
+
+              <h3>{resource.title}</h3>
+
+              <p>{resource.description}</p>
+
+              <a
+                class="btn"
+                href={withBase(resource.file)}
+                download
+                data-event={resource.event}
+              >
+                {resource.label}
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">Start with one real problem</p>
+
+        <h2>Featured doctoral research prompt</h2>
+
+        <p>
+          Replace the bracketed sections with your professional context and
+          use the prompt to generate preliminary research directions.
+        </p>
+
+        <button
+          id="copy-featured-prompt"
+          class="btn"
+          type="button"
+          data-event="featured_prompt_copy"
+        >
+          Copy Prompt
+        </button>
+
+        <p
+          id="copy-status"
+          class="copy-status"
+          aria-live="polite"
+        ></p>
+      </div>
+
+      <div class="prompt-panel">
+        <pre><code id="featured-prompt">{featuredPrompt}</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container">
+      <p class="eyebrow">Research opportunities</p>
+
+      <h2>Explore possibilities across business functions</h2>
+
+      <div class="research-grid">
+        <article>
+          <h3>Finance</h3>
+          <p>
+            FP&amp;A, risk, audit, credit, treasury, investment, taxation and
+            fintech.
+          </p>
+        </article>
+
+        <article>
+          <h3>Marketing</h3>
+          <p>
+            Branding, CRM, digital marketing, pricing, customer experience,
+            retail and sales.
+          </p>
+        </article>
+
+        <article>
+          <h3>Human Resources</h3>
+          <p>
+            Talent, performance, learning, compensation, organisational
+            culture and wellbeing.
+          </p>
+        </article>
+
+        <article>
+          <h3>Operations and Supply Chain</h3>
+          <p>
+            Quality, capacity, procurement, inventory, logistics, lean and
+            resilience.
+          </p>
+        </article>
+
+        <article>
+          <h3>Strategy and Technology</h3>
+          <p>
+            Transformation, innovation, governance, AI, cybersecurity,
+            analytics and automation.
+          </p>
+        </article>
+
+        <article>
+          <h3>Education, Healthcare and Sustainability</h3>
+          <p>
+            Learner outcomes, service quality, clinical workflow, ESG,
+            circular economy and social impact.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container responsible-ai">
+      <div>
+        <p class="eyebrow">Responsible-AI rule</p>
+
+        <h2>Use AI with scholarly judgement</h2>
+      </div>
+
+      <div>
+        <ul>
+          <li>
+            Check university, supervisor, ethics-committee, employer, funder
+            and publisher requirements.
+          </li>
+
+          <li>
+            Never upload confidential or identifiable data without explicit
+            authority.
+          </li>
+
+          <li>
+            Verify every source-dependent claim using the original source.
+          </li>
+
+          <li>
+            Record and disclose material AI assistance whenever required.
+          </li>
+
+          <li>
+            Retain responsibility for every research decision and conclusion.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container cta-band">
+      <p class="eyebrow">Continue the conversation</p>
+
+      <h2>
+        Available for faculty development, research workshops, academic
+        programmes and responsible-AI sessions.
+      </h2>
+
+      <div class="btn-row">
+        <a
+          class="btn btn-gold"
+          href={withBase('/contact')}
+          data-event="contact_speaking_click"
+        >
+          Discuss a Session
+        </a>
+
+        <a
+          class="btn btn-outline"
+          href="https://www.linkedin.com/in/akhilmenon24/"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-event="linkedin_click"
+        >
+          Connect on LinkedIn
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  const copyButton = document.getElementById('copy-featured-prompt');
+  const promptElement = document.getElementById('featured-prompt');
+  const copyStatus = document.getElementById('copy-status');
+
+  copyButton?.addEventListener('click', async () => {
+    const promptText = promptElement?.textContent || '';
+
+    try {
+      await navigator.clipboard.writeText(promptText);
+
+      if (copyStatus) {
+        copyStatus.textContent = 'Prompt copied to clipboard.';
+      }
+
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'featured_prompt_copy');
+      }
+    } catch {
+      if (copyStatus) {
+        copyStatus.textContent =
+          'Unable to copy automatically. Please select and copy the prompt.';
+      }
+    }
+  });
+
+  document.querySelectorAll('[data-event]').forEach((element) => {
+    element.addEventListener('click', () => {
+      const eventName = element.getAttribute('data-event');
+
+      if (eventName && typeof window.gtag === 'function') {
+        window.gtag('event', eventName);
+      }
+    });
+  });
+</script>
+
+<style>
+  .session-summary {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .session-summary div {
+    padding: 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .session-summary strong,
+  .session-summary span {
+    display: block;
+  }
+
+  .session-summary strong {
+    margin-bottom: 0.4rem;
+    color: var(--gold-600);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .narrow-intro {
+    max-width: 900px;
+  }
+
+  blockquote {
+    margin: 2rem 0 0;
+    padding: 1.5rem 1.75rem;
+    border-left: 5px solid var(--gold-500);
+    background: var(--surface-soft);
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .presentation-note {
+    max-width: 760px;
+    color: #d1dce4;
+  }
+
+  .presentation-viewer {
+    margin: 2rem 0;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius-lg);
+    background: #ffffff;
+  }
+
+  .presentation-viewer iframe {
+    display: block;
+    width: 100%;
+    height: 720px;
+    border: 0;
+  }
+
+  .resource-grid,
+  .research-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .resource-card,
+  .research-grid article {
+    padding: 1.75rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+  }
+
+  .resource-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .resource-card p {
+    flex-grow: 1;
+  }
+
+  .resource-format {
+    display: inline-block;
+    width: fit-content;
+    margin-bottom: 1rem;
+    color: var(--gold-700);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .prompt-panel {
+    overflow: auto;
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    background: #071b2e;
+  }
+
+  .prompt-panel pre {
+    margin: 0;
+    white-space: pre-wrap;
+  }
+
+  .prompt-panel code {
+    color: #edf4f8;
+    font-family: inherit;
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .copy-status {
+    min-height: 1.5rem;
+    margin-top: 0.75rem;
+  }
+
+  .responsible-ai {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 3rem;
+  }
+
+  .responsible-ai li + li {
+    margin-top: 0.8rem;
+  }
+
+  @media (max-width: 980px) {
+    .session-summary,
+    .resource-grid,
+    .research-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .responsible-ai {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .session-summary,
+    .resource-grid,
+    .research-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .presentation-viewer iframe {
+      height: 520px;
+    }
+  }
+</style>

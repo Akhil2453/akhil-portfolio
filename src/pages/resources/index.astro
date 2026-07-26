@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { withBase } from '../../utils/url';
+---
+
+<BaseLayout
+  title="Learning Resources | Akhil Arun Menon"
+  description="Research, education, design engineering, robotics and data resources created by Akhil Arun Menon."
+>
+  <PageHero
+    eyebrow="Learning resources"
+    title="Practical resources for educators, scholars and innovators"
+    description="Webinar materials, toolkits, workbooks, prompt libraries and professional learning resources."
+  />
+
+  <section class="section">
+    <div class="container">
+      <article class="project-header">
+        <div>
+          <span class="tag">Doctoral Research · Responsible AI</span>
+
+          <p class="eyebrow" style="margin-top:1.25rem">
+            Featured resource
+          </p>
+
+          <h2>The AI-enabled Doctorate</h2>
+
+          <p class="lead">
+            Access the complete session presentation, participant workbook,
+            AI research prompt library and responsible-AI research toolkit.
+          </p>
+
+          <a
+            class="btn"
+            href={withBase('/resources/ai-enabled-doctorate')}
+          >
+            Explore Resource Hub
+          </a>
+        </div>
+
+        <div class="project-cover">
+          <img
+            src={withBase('/images/brand/og-default.png')}
+            alt="The AI-enabled Doctorate resource hub"
+          />
+        </div>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
