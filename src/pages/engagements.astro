@@ -1,0 +1,186 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { withBase } from '../utils/url';
+---
+
+<BaseLayout
+  title="Speaking, Judging and Professional Service | Akhil Arun Menon"
+  description="Selected speaking engagements, competition judging, international robotics coaching and academic service by Akhil Arun Menon."
+>
+  <PageHero
+    eyebrow="Professional engagements"
+    title="Contribution beyond the classroom"
+    description="Speaking, competition coaching and judging, academic service and professional-learning engagements."
+  />
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Academic service</p>
+      <h2>Institutional contribution</h2>
+
+      <div class="grid grid-2" style="margin-top:2rem">
+        <article class="feature-card">
+          <span class="tag">Board Member</span>
+
+          <h3 style="margin-top:1rem">
+            REVA Centre of Excellence for Indian Knowledge Systems
+          </h3>
+
+          <p>
+            Serving as a Board Member of REVA University's Centre of
+            Excellence for Indian Knowledge Systems, contributing from a
+            Design Engineering and interdisciplinary education perspective.
+          </p>
+
+          <a
+            class="btn btn-outline"
+            href="https://www.reva.edu.in/iks"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View official REVA listing ↗
+          </a>
+        </article>
+
+        <article class="feature-card">
+          <span class="tag">Current academic work</span>
+
+          <h3 style="margin-top:1rem">
+            School of Design Engineering
+          </h3>
+
+          <p>
+            Developing activity-based curriculum, faculty preparation and
+            hands-on assessment systems as Assistant Professor at REVA
+            University.
+          </p>
+
+          <a
+            class="btn btn-outline"
+            href={withBase('/reva')}
+          >
+            View REVA work profile
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container">
+      <p class="eyebrow">Competition roles</p>
+      <h2>Coaching, judging and evaluation</h2>
+
+      <div class="grid grid-3" style="margin-top:2rem">
+        <article class="feature-card">
+          <span class="tag">International · 2026</span>
+
+          <h3 style="margin-top:1rem">
+            Coach — Team India, FIRST Global Challenge 2026
+          </h3>
+
+          <p>
+            Completed the international competition cycle as Coach for Team
+            India, supporting engineering reviews, match strategy,
+            documentation and readiness.
+          </p>
+
+          <a
+            class="btn btn-outline"
+            href={withBase('/projects/first-global-challenge-2026')}
+          >
+            View case study
+          </a>
+        </article>
+
+        <article class="feature-card">
+          <span class="tag">National · September 2026</span>
+
+          <h3 style="margin-top:1rem">
+            Judge — WSRO National Championship
+          </h3>
+
+          <p>
+            Served as a national-level judge for the Junior Line Following
+            (Non-Lego) category at the WSRO National Championship 2026 in Goa.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <span class="tag">Regional · 28 June 2026</span>
+
+          <h3 style="margin-top:1rem">
+            Judge — Smart Factory Robotics Challenge
+          </h3>
+
+          <p>
+            Served as a judge for the Smart Factory Robotics Challenge at
+            the WSRO Goa Regional Championship.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container project-header">
+      <div>
+        <span class="tag">Research & Responsible AI</span>
+
+        <p class="eyebrow" style="margin-top:1rem">
+          Professional learning session
+        </p>
+
+        <h2>The AI-enabled Doctorate</h2>
+
+        <p class="lead">
+          A doctoral-research session focused on using AI responsibly for
+          problem framing, research-question development, literature planning
+          and structured research workflows.
+        </p>
+
+        <p>
+          The permanent resource hub includes the complete presentation,
+          Participant Workbook, AI Research Prompt Library and AI Research
+          Toolkit.
+        </p>
+
+        <a
+          class="btn"
+          href={withBase('/resources/ai-enabled-doctorate')}
+        >
+          Explore the resource hub
+        </a>
+      </div>
+
+      <div class="feature-card">
+        <h3>Resource-led sessions</h3>
+
+        <p>
+          Professional-learning engagements are designed to leave participants
+          with usable frameworks, tools and reference material rather than
+          ending with the live session.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container cta-band">
+      <p class="eyebrow">Engage</p>
+
+      <h2>
+        Available for academic workshops, competition evaluation, faculty
+        development, robotics programmes and invited speaking engagements.
+      </h2>
+
+      <a
+        class="btn btn-gold"
+        href={withBase('/contact')}
+      >
+        Discuss an engagement
+      </a>
+    </div>
+  </section>
+</BaseLayout>
