@@ -20,7 +20,58 @@ const projectSchema = {
   dateCreated: project.data.period,
   keywords: project.data.tools.join(', ')
 };
-const isFgc = project.id === 'first-global-challenge-2025';
+const fgcGallery =
+  project.id === 'first-global-challenge-2025'
+    ? [
+        {
+          image: '/images/robotics/fgc-robot-labelled.webp',
+          alt: 'Labelled CAD rendering showing the drivetrain, feeder, shooter, intake, climber and guides'
+        },
+        {
+          image: '/images/robotics/fgc-climber-detail.webp',
+          alt: 'CAD detail of the FIRST Global Challenge 2025 climbing mechanism'
+        },
+        {
+          image: '/images/robotics/fgc-intake-detail.webp',
+          alt: 'CAD detail of the FIRST Global Challenge 2025 intake mechanism'
+        }
+      ]
+    : project.id === 'first-global-challenge-2026'
+      ? [
+          {
+            image: '/images/robotics/fgc-2026/fgc-2026-full-robot.png',
+            alt: 'Complete CAD rendering of Team India FIRST Global Challenge 2026 robot'
+          },
+          {
+            image: '/images/robotics/fgc-2026/fgc-2026-chassis.png',
+            alt: 'Competition robot chassis and drivetrain architecture'
+          },
+          {
+            image: '/images/robotics/fgc-2026/fgc-2026-intake.png',
+            alt: 'FIRST Global Challenge 2026 intake mechanism'
+          },
+          {
+            image: '/images/robotics/fgc-2026/fgc-2026-transfer.png',
+            alt: 'FIRST Global Challenge 2026 transfer mechanism'
+          },
+          {
+            image: '/images/robotics/fgc-2026/fgc-2026-shooter.png',
+            alt: 'FIRST Global Challenge 2026 shooter mechanism'
+          },
+          {
+            image: '/images/robotics/fgc-2026/fgc-2026-climber.png',
+            alt: 'FIRST Global Challenge 2026 climbing mechanism'
+          },
+          {
+            image: '/images/robotics/fgc-2026/fgc-2026-electrical-architecture.png',
+            alt: 'Electrical architecture of Team India FIRST Global Challenge 2026 robot'
+          },
+          {
+            image: '/images/robotics/fgc-2026/fgc-2026-controller-mapping.png',
+            alt: 'Driver controller and joystick mapping used for the competition robot'
+          }
+        ]
+      : [];
 ---
 <BaseLayout title={`${project.data.title} | Akhil Arun Menon`} description={project.data.summary} image={project.data.image} jsonLd={projectSchema}>
   <section class="section">
@@ -55,19 +106,29 @@ const isFgc = project.id === 'first-global-challenge-2025';
     <article class="narrow prose"><Content /></article>
   </section>
 
-  {isFgc && (
-    <section class="section section-dark">
-      <div class="container">
-        <p class="eyebrow">Engineering gallery</p>
-        <h2>Subsystems and final integration</h2>
-        <div class="gallery" style="margin-top:2rem">
-          <img src={withBase('/images/robotics/fgc-robot-labelled.webp')} alt="Labelled CAD rendering showing the drivetrain, feeder, shooter, intake, climber and guides" loading="lazy" />
-          <img src={withBase('/images/robotics/fgc-climber-detail.webp')} alt="CAD detail of the climbing mechanism" loading="lazy" />
-          <img src={withBase('/images/robotics/fgc-intake-detail.webp')} alt="CAD detail of the intake mechanism" loading="lazy" />
-        </div>
+{fgcGallery.length > 0 && (
+  <section class="section section-dark">
+    <div class="container">
+
+      <p class="eyebrow">Engineering gallery</p>
+
+      <h2>
+        Subsystems, architecture and final integration
+      </h2>
+
+      <div class="gallery" style="margin-top:2rem">
+        {fgcGallery.map((item) => (
+          <img
+            src={withBase(item.image)}
+            alt={item.alt}
+            loading="lazy"
+          />
+        ))}
       </div>
-    </section>
-  )}
+
+    </div>
+  </section>
+)}
 
   <section class="section">
     <div class="container cta-band">
